@@ -1,2 +1,3 @@
-title: Python for climate scientists
-theme: jekyll-theme-cayman
+title: python for climate scientists
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: "dirt" #"default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"

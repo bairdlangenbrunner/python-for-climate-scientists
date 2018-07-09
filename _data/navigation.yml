@@ -1,0 +1,15 @@
+# main links
+main:
+  - title: "about"
+    url: https://bairdlangenbrunner.github.io
+    description: why I started this project
+  - title: "getting started"
+    url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
+    description: where do I start?
+  - title: "favorite resources"
+    url: /year-archive/
+    description: my favorite resources online
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/
