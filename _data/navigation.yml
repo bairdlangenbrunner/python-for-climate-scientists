@@ -1,7 +1,7 @@
 # main links
 main:
   - title: "about"
-    url: https://bairdlangenbrunner.github.io
+    url: /about/
     description: why I started this project
   - title: "getting started"
     url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
