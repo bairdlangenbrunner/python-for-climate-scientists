@@ -7,7 +7,7 @@ main:
     url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
     description: where do I start?
   - title: "favorite resources"
-    url: /year-archive/
+    url: /resources/
     description: my favorite resources online
   # - title: "Sample Collections"
   #   url: /collection-archive/
