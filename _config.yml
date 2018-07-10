@@ -3,18 +3,9 @@ minimal_mistakes_skin: "baird" #"default", "air", "aqua", "contrast", "dark", "d
 remote_theme: "bairdlangenbrunner/swiss"
 theme_color: solarized-orange
 
-defaults:
-  # _posts
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-      #author_profile: true
-      #read_time: true
-      comments: true
-      share: true
-      related: true
+plugins:
+  - jekyll-feed
+  - jemoji
 
 include:
   - _pages
