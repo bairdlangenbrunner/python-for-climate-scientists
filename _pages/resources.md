@@ -1,6 +1,7 @@
 ---
 permalink: /resources/
 layout: page
+title: resources
 order: 2
 ---
 
