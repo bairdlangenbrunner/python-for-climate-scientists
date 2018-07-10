@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>about</title>
-  <meta name="description" content="">
+  <title>Creating simple figures and axes in matplotlib</title>
+  <meta name="description" content="```This is still under construction…">
 
   
   
   <link rel="stylesheet" href="http://localhost:4000/assets/style.css">
 
-  <link rel="canonical" href="http://localhost:4000/about/">
+  <link rel="canonical" href="http://localhost:4000/coding/2018/07/09/simple-matplotlib-plots.html">
   <link rel="alternate" type="application/rss+xml" title="Python for climate scientists" href="http://localhost:4000/feed.xml">
 
   <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -82,45 +82,62 @@
 
 
     <div>
-      <article class="container mx-auto px-2 mt2 mb4">
-
-  <!--
-  <header>
-    <h1 class="h0 mt-3 mb-minus-3 header-title-page">about</h1>
-  </header>
-  -->
-  
-  <!--
-  <header>
-    <h1 class="h0 py-4 mt-3">about</h1>
-  </header>
-  <div class="col-4 sm-width-full border-top-thin">
+      <article class="container px-2 mx-auto mb4" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 class="h1 col-9 sm-width-full inline-block" itemprop="name headline">Creating simple figures and axes in matplotlib</h1>
+  <div class="col-4 sm-width-full mt-1 border-top-thin ">
+    <p class="mb-3 py-2 bold h4"><time datetime="2018-07-09T00:00:00-07:00" itemprop="datePublished">July, 2018</time></p>
   </div>
-  -->
-  
-  <div class="prose mb-4 py-4">
-    <p>Hi, and welcome to the <strong>Python for climate scientists</strong> project!</p>
 
-<p>I’m <a href="https://bairdlangenbrunner.github.io">Baird</a>, and I’ve set this up to document my experience using Python for data analysis and plotting.  My intention here is not to reinvent the wheel, since there are already many great resources out there doing something like this.  Instead, I hope to organize the moving parts and create an online repository with helpful links to everything that I’ve found useful.</p>
+  <div class="prose" itemprop="articleBody">
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This is still under construction...
 
-<p>The idea here is to offer some helpful info to those who are either new to Python or are looking to refine the tools they use most.  Moving forward, my goals here are to:</p>
+check back sooooon.
+</code></pre></div></div>
+
+<p><em>Matplotlib saving best practices:</em></p>
+
 <ul>
-  <li>Add some useful and practical documentation on analyzing and plotting data relevant to climate science</li>
-  <li>Document tips on best practices in keeping a working Python ecosystem on your personal computer or remote machines</li>
-  <li>Highlight and discuss <em>other</em> resources out there for this</li>
-  <li>Dump out my own thoughts on getting started with Python</li>
-  <li>Outline suggestions for staying up-to-date with the eye-watering speed at which Python libraries and tools are evolving</li>
+  <li><code class="highlighter-rouge">bbox_inches = tight</code></li>
+  <li><code class="highlighter-rouge">transparent=True</code></li>
+  <li><code class="highlighter-rouge">dpi=300</code> or <code class="highlighter-rouge">dpi=600</code> when saving .png files</li>
 </ul>
 
-<p>This is <em>also</em> a way for me to brush up on my own GitHub skills.  If you’re thinking of setting up a similar project yourself, don’t hesitate to ask me questions on how to do it.</p>
+<p><em>The travails of figure/axis creation</em></p>
 
-<p>Please check back soon as I update this site, and let me know if you’d like to see anything specific as I get things going.</p>
+<ul>
+  <li><code class="highlighter-rouge">plt.figure</code>, <code class="highlighter-rouge">plt.subplots</code>, <code class="highlighter-rouge">plt.axes()</code></li>
+</ul>
 
-<p>Thanks,<br />
-Baird</p>
+<!--
+```
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+```
+
+Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+
+[jekyll-docs]: http://jekyllrb.com/docs/home
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-talk]: https://talk.jekyllrb.com/
+
+-->
 
   </div>
+
 </article>
+
+<div class="container mx-auto px-2 py-2 clearfix">
+  <!-- Use if you want to show previous and next for posts within a category. -->
+
+
+
+
+
+
+</div>
 
     </div>
 

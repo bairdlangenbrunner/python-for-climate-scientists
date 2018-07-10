@@ -5,15 +5,23 @@ title: where to start
 order: 4
 ---
 
+# Where to start
+
 If you find yourself at the very beginning of your Python experience, and you're not totally sure where to begin, you've come to the right place!  I'm writing this to hopefully get you started.
 
-And I have to say, if this *is* your first foray into Python, I'm very excited for you.  It's easier now than ever before to manage a happily running Python installation on any operating system.
+And I have to say, if this *is* your first foray into Python, I'm very excited for you.  It's easier now than ever before to manage a happily running Python installation on any operating system.  For you, that means less time banging your head against a keyboard, and more time learning :clap: that :clap: language.
 
-In this case, most of this information is specific to a Mac OS, but you can follow parallel steps to get other important things.
+In this case of these recommendations, most of my tips are based on a Mac OS, but if you're a Windows or LINUX user, you can follow approximately the same steps below.
 
 ## Step 1.  Install conda or miniconda on your machine.
 
 I would recommend using either Anaconda or miniconda for this.  They each have their advantages an disadvantages; if you're going for a lightweight installation, miniconda is what you want.  Anaconda is a bit bulky but comes with lots of bells and whistles.  Personally, I use both depending on the machine I'm using.  Anaconda can take up to 10-20 GB of space after all is said and done, so if that could be an issue, avoid it.
+
+* If you're on a Mac, installing is as simple as downloading the binary file and opening it.
+
+* If you're on a LINUX machine, I would download the tarball and do it from the command line:
+
+* If you're on a Windows, I'm very sorry to hear that.  You can also just download the binary directly.
 
 ### What's the difference between conda and Anaconda?
 
@@ -33,3 +41,16 @@ I mean, go ahead and try it if you want, but I honestly think of it as a little 
 ## Step 2.  Mess around with the conda installation and make sure everything looks alright.
 
 If you're following along, I'd recommend looking at the official [getting started with ```conda```](https://conda.io/docs/user-guide/getting-started.html) documentation.
+
+The first thing to do is open up a terminal shell (Terminal on Mac, or my preference:  iTerm2), type ```python```, and hit enter.
+
+```
+baird$ python
+
+Python 3.6.6 |Anaconda, Inc.| (default, Jun 28 2018, 11:07:29)
+[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+From the lines above, you can see that I'm running Python 3.6.6 via Anaconda.  If you downloaded Anaconda or miniconda and you don't see it above, you may have to mess around with your bash profile.  See [this]() from Stack Overflow.
