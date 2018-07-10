@@ -1,7 +1,8 @@
 ---
 permalink: /about/
-#title: about
-layout: single
+title: about
+layout: page
+order: 1
 ---
 
 Hi, and welcome to the **Python for climate scientists** project!
