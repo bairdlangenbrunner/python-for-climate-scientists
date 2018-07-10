@@ -9,3 +9,4 @@ plugins:
 
 include:
   - _pages
+  - _posts
