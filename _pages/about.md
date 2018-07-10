@@ -18,7 +18,7 @@ The idea here is to offer some helpful info to those who are either new to Pytho
 
 This is *also* a way for me to brush up on my own GitHub skills.  If you're thinking of setting up a similar project yourself, don't hesitate to ask me questions on how to do it.
 
-Please check back soon as I update this site, and let me know if you'd like to see anything specific as I get things going.
+Please check back as I update things here, and <a href="mailto:{{site.email}}">email me</a>  if you'd like to see anything specific as I get things going.
 
-Thanks,  
+Cheers,  
 Baird

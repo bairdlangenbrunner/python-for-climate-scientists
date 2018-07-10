@@ -32,7 +32,7 @@ a:hover { color: #008080; text-decoration: underline; }
 
 pre { margin: 32px 0; width: 100%; overflow-x: auto; border-left: 8px solid #008080; padding-left: 16px; line-height: 1.25; }
 
-code { color: #2ea0a0; font-size: 15px; padding: 1px 4px; }
+code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 
 .prose p, .prose ol, .prose ul { font-size: 16px; margin-bottom: 1em; width: 100%; }
 @media (min-width: 55em) { .prose p, .prose ol, .prose ul { max-width: 55em; } }
