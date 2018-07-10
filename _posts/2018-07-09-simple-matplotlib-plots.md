@@ -1,17 +1,27 @@
 ---
 layout: category-post
-title:  'Simple plots with matplotlib'
+title:  'Creating simple figures and axes in matplotlib'
 date:   2018-07-09
 categories: coding
 ---
 
-Matplotlib saving best practices:
-* bbox_inches = tight
-* transparent=True
-* dpi=300 or dpi=600 for .png
+```
+This is still under construction...
 
-...more to be added.
+check back sooooon.
+```
 
+_Matplotlib saving best practices:_
+
+* ```bbox_inches = tight```
+* ```transparent=True```
+* ```dpi=300``` or ```dpi=600``` when saving .png files
+
+_The travails of figure/axis creation_
+
+* ```plt.figure```, ```plt.subplots```, ```plt.axes()```
+
+<!--
 ```
 def print_hi(name)
   puts "Hi, #{name}"
@@ -25,3 +35,5 @@ Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most ou
 [jekyll-docs]: http://jekyllrb.com/docs/home
 [jekyll-gh]:   https://github.com/jekyll/jekyll
 [jekyll-talk]: https://talk.jekyllrb.com/
+
+-->
