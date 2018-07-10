@@ -1,7 +1,7 @@
 title: Python for climate scientists
 minimal_mistakes_skin: "baird" #"default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
 remote_theme: "bairdlangenbrunner/swiss"
-theme_color: solarized-orange
+theme_color: solarized-darkcyan
 
 plugins:
   - jekyll-feed
