@@ -13,6 +13,8 @@ Some of my favorite online resources are listed below.
   * See also his [Think Stats](http://greenteapress.com/wp/think-stats-2e/) and [Think Bayes](http://greenteapress.com/wp/think-bayes/) books for statistics
 -->
 
+<!--
 ```
 More to come soon...
 ```
+-->
