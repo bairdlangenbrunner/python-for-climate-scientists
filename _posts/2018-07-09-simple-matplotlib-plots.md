@@ -10,9 +10,7 @@ Matplotlib saving best practices:
 * transparent=True
 * dpi=300 or dpi=600 for .png
 
-...to be added.
-
-Jekyll also offers powerful support for code snippets:
+...more to be added.
 
 ```
 def print_hi(name)
