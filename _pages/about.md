@@ -20,6 +20,5 @@ This is *also* a way for me to brush up on my own GitHub skills.  If you're thin
 
 Please check back soon as I update this site, and let me know if you'd like to see anything specific as I get things going.
 
-Thanks,
-
+Thanks,  
 Baird
