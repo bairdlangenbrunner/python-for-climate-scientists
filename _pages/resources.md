@@ -1,6 +1,7 @@
 ---
 permalink: /resources/
-layout: single
+layout: page
+order: 2
 ---
 
 Some of my favorite online resources are listed below.
