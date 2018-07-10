@@ -26,11 +26,11 @@ h5, .h5 { font-size: 16px; }
 h6, .h6 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; }
 
 /*inherit*/
-a { color: #008b8b; text-decoration: none; }
+a { color: #008080; text-decoration: none; }
 
-a:hover { color: #008b8b; text-decoration: underline; }
+a:hover { color: #008080; text-decoration: underline; }
 
-pre { margin: 32px 0; width: 75%; overflow-x: auto; border-left: 8px solid #008b8b; padding-left: 16px; background-color: #eee8d5; }
+pre { margin: 32px 0; width: 100%; overflow-x: auto; border-left: 8px solid #008080; padding-left: 16px; background-color: #eee8d5; }
 
 code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 
@@ -39,7 +39,7 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 .prose ul, .prose ol { padding-left: 40px; }
 .prose li { margin-bottom: 0.5em; }
 .prose li ul li, .prose li ol li { margin-bottom: 0; }
-.prose blockquote { border-left: 8px solid #008b8b; margin: 32px 0; padding-left: 16px; }
+.prose blockquote { border-left: 8px solid #008080; margin: 32px 0; padding-left: 16px; }
 .prose blockquote p { font-size: 16px; }
 @media (min-width: 55em) { .prose blockquote { padding-left: 32px; margin: 64px 0 64px -40px; max-width: 110%; }
   .prose blockquote p { font-size: 16px; } }
@@ -86,7 +86,7 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 .border-0 { border: 0; }
 
 /* Theme color utilities */
-.header-background { background-color: #008b8b; }
+.header-background { background-color: #008080; }
 
 .header-border { border-color: #002b36; }
 
@@ -110,7 +110,7 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 
 .header-link { color: #fdf6e3 !important; }
 
-.text-accent { color: #008b8b; }
+.text-accent { color: #008080; }
 
 /* Layout utilities */
 .container { max-width: 55em; }
