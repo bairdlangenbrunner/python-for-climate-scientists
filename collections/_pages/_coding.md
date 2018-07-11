@@ -5,6 +5,9 @@ title: coding
 order: 3
 ---
 
+```
+Coming soon...
+```
 <!--
 {% for item in site.pages %}
   <h2>{{ item.title }}</h2>
