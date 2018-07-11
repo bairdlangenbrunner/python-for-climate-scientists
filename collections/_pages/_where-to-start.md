@@ -7,7 +7,7 @@ order: 4
 
 # Where to start
 
-If you find yourself at the very beginning of your Python experience, and you're not totally sure where to begin, you've come to the right place!  I'm writing this to hopefully get you started.
+If you find yourself at the beginning of your Python experience, and you're not totally sure where to begin, you've come to the right place!  I'm writing this to hopefully get you started.
 
 And I have to say, if this *is* your first foray into Python, I'm very excited for you.  It's easier now than ever before to manage a happily running Python installation on any operating system.  For you, that means less time banging your head against a keyboard, and more time learning :clap: that :clap: language.
 
