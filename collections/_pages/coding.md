@@ -15,11 +15,6 @@ Coming soon...
   <p>{{ item.description }}</p>
   <p><a href="{{ item.url }}">{{ item.title }}</a></p>
 {% endfor %}
-
-layout: category_index
-title: Writing
-permalink: /writing/
-category_name: writing
 -->
 
 {% assign sorted_pages = site.coding | sort:"order" %}
