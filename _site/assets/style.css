@@ -7,7 +7,7 @@ input, select, textarea, button { font-family: inherit; font-size: inherit; line
 body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { margin: 0; padding: 0; }
 
 /** Basic styling */
-body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #002b36; background-color: #fdf6e3; /*#fff;*/ }
+body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.25; color: #002b36; background-color: #fdf6e3; /*#fff;*/ }
 
 p { margin-top: 0; margin-bottom: 0.5em; }
 
@@ -256,7 +256,7 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 
 .highlight table pre { margin: 0; }
 
-.highlight, .highlight .w { color: #93a1a1; background-color: #002b36; }
+.highlight, .highlight .w { color: #586e75; }
 
 .highlight .err { color: #002b36; background-color: #dc322f; }
 

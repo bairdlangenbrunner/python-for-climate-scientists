@@ -11,3 +11,20 @@ plugins:
 
 include:
   - _pages
+
+collections:
+  - coding
+
+collections:
+  coding:
+    output: true
+    permalink: /:collection/:name
+
+defaults:
+  - scope:
+      path: ""
+      type: coding
+    values:
+      layout: page
+
+collections_dir: collections

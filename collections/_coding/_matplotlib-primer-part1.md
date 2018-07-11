@@ -1,8 +1,9 @@
 ---
-layout: category-post
-title:  'Creating simple figures and axes in matplotlib'
-date:   2018-07-09
-categories: coding
+
+layout: page
+title: Matplotlib primer, part 1
+description: Creating simple figures and axes in matplotlib
+
 ---
 
 ```

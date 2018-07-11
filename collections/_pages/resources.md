@@ -5,6 +5,10 @@ title: resources
 order: 2
 ---
 
+```
+Coming soon...
+```
+
 <!--
 Some of my favorite online resources are listed below.
 
