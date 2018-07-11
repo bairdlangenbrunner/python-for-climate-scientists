@@ -22,7 +22,8 @@ permalink: /writing/
 category_name: writing
 -->
 
-{% for item in site.coding %}
+{% assign sorted_pages = site.coding | sort:"order" %}
+{% for item in sorted_pages %}
  <!-- <h2>{{ item.title }}</h2>-->
   <!--<p>{{ item.description }}</p>-->
   <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
