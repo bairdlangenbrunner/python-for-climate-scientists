@@ -1,6 +1,7 @@
 title: Python for climate scientists
 remote_theme: "bairdlangenbrunner/swiss"
-theme_color: solarized-teal
+theme_color: orange-light
+syntax_highlighting: light
 
 author: Baird
 email: blangenb@uci.edu
@@ -28,3 +29,7 @@ defaults:
       layout: page
 
 collections_dir: collections
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
