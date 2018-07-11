@@ -30,19 +30,17 @@ a { color: #008080; text-decoration: none; }
 
 a:hover { color: #008080; text-decoration: underline; }
 
-pre { margin: 32px 0; width: 100%; overflow-x: auto; border-left: 8px solid #008080; padding-left: 16px; line-height: 1.25; }
+pre { margin: 32px 0; width: 100%; white-space: pre-wrap; border-left: 8px solid #2ea0a0; padding-left: 16px; border-top: solid 2px #eee8d5; border-bottom: solid 2px #eee8d5; border-right: solid 2px #eee8d5; line-height: 1.25; padding-top: 4px; padding-bottom: 4px; }
 
-code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
+code { color: #2ea0a0; font-size: 15px; }
 
 .prose p, .prose ol, .prose ul { font-size: 16px; margin-bottom: 1em; width: 100%; }
-@media (min-width: 55em) { .prose p, .prose ol, .prose ul { max-width: 55em; } }
+@media (min-width: 56em) { .prose p, .prose ol, .prose ul { max-width: 56em; } }
 .prose ul, .prose ol { padding-left: 40px; }
 .prose li { margin-bottom: 0.5em; }
 .prose li ul li, .prose li ol li { margin-bottom: 0; }
-.prose blockquote { border-left: 8px solid #008080; margin: 32px 0; padding-left: 16px; }
+.prose blockquote { border-left: 8px solid #2ea0a0; margin: 32px 0; padding-left: 16px; font-size: 16px; }
 .prose blockquote p { font-size: 16px; }
-@media (min-width: 55em) { .prose blockquote { padding-left: 32px; margin: 64px 0 64px -40px; max-width: 110%; }
-  .prose blockquote p { font-size: 16px; } }
 .prose hr { color: #002b36; border-style: solid; border-width: thin; margin-top: 0.5em; margin-bottom: 0.5em; }
 .prose dt { font-weight: bold; font-style: italic; line-height: 1.25; }
 .prose dd { font-style: italic; margin-bottom: 0.5em; }
@@ -59,7 +57,7 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 
 /* Type utilities */
 .h0 { font-size: 48px; line-height: 0.85em; word-wrap: break-word; }
-@media (min-width: 55em) { .h0 { font-size: 86px; } }
+@media (min-width: 56em) { .h0 { font-size: 86px; } }
 
 .text-right { text-align: right; }
 
@@ -113,7 +111,7 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 .text-accent { color: #008080; }
 
 /* Layout utilities */
-.container { max-width: 55em; }
+.container { max-width: 56em; }
 
 .col-1 { width: 8.3333333333%; }
 
@@ -139,7 +137,7 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 
 .col-12 { width: 100%; }
 
-@media (max-width: 55em) { .sm-width-full { width: 100% !important; } }
+@media (max-width: 56em) { .sm-width-full { width: 100% !important; } }
 @media (min-width: 0em) { .always-width-full { width: 100% !important; } }
 .block { display: block !important; }
 
@@ -157,6 +155,7 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 
 .align-middle { vertical-align: middle; }
 
+/*.align-bottom { vertical-align: bottom; } */
 /* Padding */
 .px-0 { padding-left: 0; padding-right: 0; }
 
@@ -223,27 +222,6 @@ code { color: #2ea0a0; font-size: 16px; padding: 1px 4px; }
 
 .mb-minus-3 { margin-bottom: -32px; }
 
-@media (min-width: 52em) { .mx-lg-auto { margin-left: auto; margin-right: auto; }
-  .mt-lg-0 { margin-top: 0; }
-  .mr-lg-0 { margin-right: 0; }
-  .mb-lg-0 { margin-bottom: 0; }
-  .ml-lg-0 { margin-left: 0; }
-  .mt-lg-1 { margin-top: 8px; }
-  .mr-lg-1 { margin-right: 8px; }
-  .mb-lg-1 { margin-bottom: 8px; }
-  .ml-lg-1 { margin-left: 8px; }
-  .mt-lg-2 { margin-top: 16px; }
-  .mr-lg-2 { margin-right: 16px; }
-  .mb-lg-2 { margin-bottom: 16px; }
-  .ml-lg-2 { margin-left: 16px; }
-  .mt-lg-3 { margin-top: 32px; }
-  .mr-lg-3 { margin-right: 32px; }
-  .mb-lg-3 { margin-bottom: 32px; }
-  .ml-lg-3 { margin-left: 32px; }
-  .mt-lg-4 { margin-top: 64px; }
-  .mr-lg-4 { margin-right: 64px; }
-  .mb-lg-4 { margin-bottom: 64px; }
-  .ml-lg-4 { margin-left: 64px; } }
 .link-primary { font-weight: bold; text-decoration: none; }
 .link-primary:hover { color: #002b36; text-decoration: none; }
 
