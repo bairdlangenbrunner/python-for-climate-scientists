@@ -5,7 +5,14 @@
 
   <body>
     <div>
+
+      {% if site.gradient_header %}
+      <header class="header-multicolor-background">
+      <header class="header-multicolor-container">
+      {% else %}
       <header class="header-background">
+      {% endif %}
+
         <div class="clearfix border-bottom-thick header-border">
           <ul class="list-reset right py-1 header-text font-smoothing">
             {% assign sorted_pages = site.pages | sort:"order" %}
@@ -26,7 +33,14 @@
         	<!--<div class="col-4 sm-width-full left border-top-thin"></div>-->
         	</div>
         </div>
+
+      {% if site.gradient_header %}
       </header>
+      </header>
+      {% else %}
+      </header>
+      {% endif %}
+
     </div>
     
     <div class="container mx-auto px-2 py-4">

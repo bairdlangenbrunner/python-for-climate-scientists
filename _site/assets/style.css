@@ -7,7 +7,7 @@ input, select, textarea, button { font-family: inherit; font-size: inherit; line
 body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { margin: 0; padding: 0; }
 
 /** Basic styling */
-body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.25; color: #002b36; background-color: #fdf6e3; /*#fff;*/ }
+body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.25; color: #002b36; background-color: #fdf6e3; }
 
 p { margin-top: 0; margin-bottom: 0.5em; }
 
@@ -26,20 +26,20 @@ h5, .h5 { font-size: 16px; }
 h6, .h6 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; }
 
 /*inherit*/
-a { color: #008080; text-decoration: none; }
+a { color: #006d2c; text-decoration: none; }
 
-a:hover { color: #008080; }
+a:hover { color: #006d2c; }
 
-pre { margin: 32px 0; width: 100%; white-space: pre-wrap; border-left: 8px solid #2ea0a0; padding-left: 16px; border-top: solid 2px #eee8d5; border-bottom: solid 2px #eee8d5; border-right: solid 2px #eee8d5; line-height: 1.25; padding-top: 4px; padding-bottom: 4px; }
+pre { margin: 32px 0; width: 100%; white-space: pre-wrap; border-left: 8px solid #006d2c; padding-left: 16px; border-top: solid 2px #eee8d5; border-bottom: solid 2px #eee8d5; border-right: solid 2px #eee8d5; line-height: 1.25; padding-top: 4px; padding-bottom: 4px; }
 
-code { color: #2ea0a0; font-size: 15px; }
+code { color: #41ab5d; font-size: 15px; }
 
 .prose p, .prose ol, .prose ul { font-size: 16px; margin-bottom: 1em; width: 100%; }
 @media (min-width: 56em) { .prose p, .prose ol, .prose ul { max-width: 56em; } }
 .prose ul, .prose ol { padding-left: 40px; }
 .prose li { margin-bottom: 0.5em; }
 .prose li ul li, .prose li ol li { margin-bottom: 0; }
-.prose blockquote { border-left: 8px solid #2ea0a0; margin: 32px 0; padding-left: 16px; font-size: 16px; }
+.prose blockquote { border-left: 8px solid #41ab5d; margin: 32px 0; padding-left: 16px; font-size: 16px; }
 .prose blockquote p { font-size: 16px; }
 .prose hr { color: #002b36; border-style: solid; border-width: thin; margin-top: 0.5em; margin-bottom: 0.5em; }
 .prose dt { font-weight: bold; font-style: italic; line-height: 1.25; }
@@ -58,6 +58,8 @@ code { color: #2ea0a0; font-size: 15px; }
 /* Type utilities */
 .h0 { font-size: 48px; line-height: 0.85em; word-wrap: break-word; }
 @media (min-width: 56em) { .h0 { font-size: 86px; } }
+
+.h1 { word-wrap: break-word; }
 
 .text-right { text-align: right; }
 
@@ -84,7 +86,7 @@ code { color: #2ea0a0; font-size: 15px; }
 .border-0 { border: 0; }
 
 /* Theme color utilities */
-.header-background { background-color: #008080; }
+.header-background { background-color: #006d2c; }
 
 .header-border { border-color: #002b36; }
 
@@ -98,17 +100,20 @@ code { color: #2ea0a0; font-size: 15px; }
 
 .header-social:hover { fill: #fdf6e3; }
 
-.header-social-inverted { background: #002b36; }
+/* from https://codepen.io/steveg3003/pen/PzvjAE */
+.header-multicolor-background { background: linear-gradient(120deg, rgba(50, 150, 100, 0.6), rgba(0, 0, 100, 0)); }
 
-.header-social-inverted:hover { background: #fdf6e3; }
+.header-multicolor-container { background: linear-gradient(240deg, rgba(150, 50, 50, 0.6), rgba(0, 0, 200, 0)); }
 
-.header-social-accent { fill: #2ea0a0; }
+.header-social-inverted { background: #fdf6e3; }
+
+.header-social-accent { fill: #41ab5d; }
 
 .header-link:hover { color: #002b36 !important; }
 
 .header-link { color: #fdf6e3 !important; }
 
-.text-accent { color: #008080; }
+.text-accent { color: #006d2c; }
 
 /* Layout utilities */
 .container { max-width: 56em; }
@@ -247,11 +252,6 @@ code { color: #2ea0a0; font-size: 15px; }
   .ml-lg-4 { margin-left: 64px; } }
 .link-primary { font-weight: bold; text-decoration: none; }
 .link-primary:hover { color: #002b36; text-decoration: none; }
-
-.link-social:hover { border-radius: 100%; }
-
-.link-social { text-decoration: none; font-weight: bold; line-height: 1; }
-.link-social:hover { text-decoration: none !important; }
 
 /* ========================================================================== MIXINS ========================================================================== */
 /* em function ========================================================================== */
