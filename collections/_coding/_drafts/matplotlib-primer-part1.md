@@ -1,10 +1,7 @@
 ---
-
+permalink: /matplotlib-part-2/
 layout: page
-title: Matplotlib primer, part 1
-description: Creating simple figures and axes in matplotlib
-order: 1
-
+title: Intermediate x-y plots in matplotlib
 ---
 
 ```

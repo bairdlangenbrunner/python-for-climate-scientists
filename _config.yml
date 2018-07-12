@@ -11,16 +11,28 @@ plugins:
   - jekyll-feed
   - jemoji
 
+# notes:
+# if you include _coding here, and publish with --drafts,
+# then the _coding/_drafts collection gets published
+# and they are included in the html front page layout because
+# they apparently count as posts?
 include:
+  - _posts
+  - _coding
   - _pages
 
 collections:
   - coding
+  - pages
+#  - posts
 
 collections:
   coding:
     output: true
     permalink: /:collection/:name
+  pages:
+    output: true
+    permalink: /:name
 
 defaults:
   - scope:

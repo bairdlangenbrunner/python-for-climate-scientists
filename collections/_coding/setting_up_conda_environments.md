@@ -1,8 +1,8 @@
 ---
 permalink: /setting-up-environments/
 layout: page
-title: where to start
-order: 4
+title: conda environments
+
 ---
 
 Environments in conda are incredibly useful:  they allow you to install parallel versions of Python and its packages, or even other languages and software, that mind their own business and never affect one another.
@@ -23,15 +23,15 @@ Installing an environment is also a great way to make the switch to a new Python
 
 I typically keep at least four separate environments, described below.  You could get away with putting things like NCO and NCL into your base environment, but I've run into compatibility issues in the past, and I keep them separate to be safe.
 
-|environment      |use for         |install commands
-|---              |---          |---
-|**base**         |most things  |---
-|**nco_stable**   |NCO (NetCDF Operators) | conda install -c conda-forge nco
-|**ncl_stable**   |NCL (NCAR Command Language) | conda install -c conda-forge ncl
-|**cdo_stable**   |CDO (Climate Data Operators) | conda install -c conda-forge cdo
-|**basemap_stable** |basmap (assuming you have cartopy on yor base environment)  | conda install basemap
+|conda environment  |use for      |install commands
+|---                |---          |---
+|**base**           |most things  |---
+|**nco_stable**     |NCO (NetCDF Operators) | conda install -c conda-forge nco
+|**ncl_stable**     |NCL (NCAR Command Language) | conda install -c conda-forge ncl
+|**cdo_stable**     |CDO (Climate Data Operators) | conda install -c conda-forge cdo
+|**basemap_stable** |basmap (assuming you have cartopy in your base environment)  | conda install basemap
 
-To create these environments yourself (base is your default conda environment), type the following (choose ```y``` after each).  I like to use the ```_stable``` suffix because it helps me mentally separate an *environment* related to NCO from the language itself.  You can name them anything you like, though.
+To create these environments yourself (base is the default), type the following (choose ```y``` after each).  I like to use the ```_stable``` suffix because it helps me mentally separate an *environment* related to NCO from the language itself.  You can name them anything you like, though.
 ```
 conda create --name nco_stable
 conda create --name ncl_stable

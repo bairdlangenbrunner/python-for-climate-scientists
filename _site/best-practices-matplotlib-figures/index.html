@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Python for climate scientists</title>
-  <meta name="description" content="">
+  <title>Beset practices for saving Matplotlib figures</title>
+  <meta name="description" content="Best practices for saving figures in Matplotlib.">
 
   
   
   <link rel="stylesheet" href="http://localhost:4000/assets/style.css">
 
-  <link rel="canonical" href="http://localhost:4000/404.html">
+  <link rel="canonical" href="http://localhost:4000/best-practices-matplotlib-figures/">
   <link rel="alternate" type="application/rss+xml" title="Python for climate scientists" href="http://localhost:4000/feed.xml">
 
   <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -129,26 +129,34 @@ BAIRD NOTE:  this is the navigation bar
 
 
     <div>
-      <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+      <article class="container mx-auto px-2 mt2 mb4">
 
-<div class="container">
-  <h1>>__<</h1>
+  <!--
+  <header>
+    <h1 class="h0 mt-3 mb-minus-3 header-title-page">Beset practices for saving Matplotlib figures</h1>
+  </header>
+  -->
+  
+  <!--
+  <header>
+    <h1 class="h0 py-4 mt-3">Beset practices for saving Matplotlib figures</h1>
+  </header>
+  <div class="col-4 sm-width-full border-top-thin">
+  </div>
+  -->
+  
+  <div class="prose mb-4 py-4">
+    <p>Best practices for saving figures in Matplotlib.</p>
 
-  <p><strong>ooooooooooooooooopsies</strong></p>
-  <p>this page can't be found</p>
-</div>
+<ol>
+  <li>tight layout()</li>
+  <li>bbox_inches = tight</li>
+  <li>Transparent=True
+4.</li>
+</ol>
+
+  </div>
+</article>
 
     </div>
 
