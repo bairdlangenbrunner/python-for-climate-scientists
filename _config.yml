@@ -23,7 +23,7 @@ include:
 
 collections:
   - coding
-  - pages
+#  - pages
 #  - posts
 
 collections:
