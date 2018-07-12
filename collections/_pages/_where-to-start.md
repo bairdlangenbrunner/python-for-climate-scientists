@@ -7,42 +7,46 @@ order: 4
 
 # Where to start
 
+> By the end of this, you will be able to run Python from within your command line or from Jupyter Notebook.  You'll also be able to open a .csv file and
+
 If you find yourself at the beginning of your Python experience, and you're not totally sure where to begin, you've come to the right place!  I'm writing this to hopefully get you started.
 
-And I have to say, if this *is* your first foray into Python, I'm very excited for you.  It's easier now than ever before to manage a happily running Python installation on any operating system.  For you, that means less time banging your head against a keyboard, and more time learning :clap: that :clap: language.
+And I have to say, if this *is* your first foray into Python, I'm very excited for you!  It's easier now than ever before to manage Python on an operating system.  For you, that means less time banging your head against a keyboard trying to get your libraries to cooperate with one another, and more time learning :clap: that :clap: language.
 
-In this case of these recommendations, most of my tips are based on a Mac OS, but if you're a Windows or LINUX user, you can follow approximately the same steps below.
+Are you excited yet?!
 
-## Step 1.  Install conda or miniconda on your machine.
+![doge](https://media.giphy.com/media/9gn4lhW6wiQ6c/giphy.gif)
 
-I would recommend using either Anaconda or miniconda for this.  They each have their advantages an disadvantages; if you're going for a lightweight installation, miniconda is what you want.  Anaconda is a bit bulky but comes with lots of bells and whistles.  Personally, I use both depending on the machine I'm using.  Anaconda can take up to 10-20 GB of space after all is said and done, so if that could be an issue, avoid it.
+One note before I go further:  Most of the tips here are based on my experience with Mac OS, but if you're a Windows or LINUX user, use this resource with other documentation specific to your OS.
 
-* If you're on a Mac, installing is as simple as downloading the binary file and opening it.
+---
 
-* If you're on a LINUX machine, I would download the tarball and do it from the command line:
+### 1. To get Python going, install conda on your machine.
 
-* If you're on a Windows, I'm very sorry to hear that.  You can also just download the binary directly.
+I recommend using either [Anaconda or Miniconda][conda.io] for this.
 
-### What's the difference between conda and Anaconda?
+Which one, do you ask?  If you're brand new to Python, Anaconda will probably be a safer bet.  Miniconda is a stripped down version of Anaconda, so if you don't have much disk space, go with the mini version.  Personally, I use both, depending on the machine (e.g., on my *own* computer, I keep a giant Anaconda going, which can take up 10-20 GB of space if I'm being ambitious).  Miniconda is great for shared computers or login nodes, where your home disk space is limited.
 
-Good question!  I had to look this one up myself (multiple times).  ```conda``` is an open source package manager that was built to manage all the packages you need to run Python succesfully.  Technically, it's language agnostic, so if you find yourself using other open source languages like R or Julia often, ```conda``` is a great way to get those robustly onto your computer. 
+> **So... what are conda, Anaconda, and Miniconda?**  Good question!  I had to look this one up myself (multiple times).  ```conda``` is an open source package manager that was built to manage all the packages you need to run Python succesfully.  Technically, it's language agnostic, so if you find yourself using other open source languages like R or Julia often, ```conda``` is a great way to get those robustly onto your computer.
+>
+> **What about pip?  I know someone who uses that.  Maybe I can just use it for Python?**
+> Sure, pip is totally fine!  But I'll let you in on a little secret:  it comes *with* conda, so you may as well go with that instead.
+>
+> **Hmm... ok, and what about Canopy?  One of my labmates uses that.**
+> I mean, go ahead and try it if you want, but I honestly think of it as a little outdated.  That could be a controversial statement, but here are my reasons for using conda:
 
-### What about ```pip```?  I know someone who uses that.  Maybe I can just use it for Python?
+1.  With conda, you can install multiple parallel "environments" of Python (or whatever *other* languages you prefer).  That means you can have a Python installation you use most of the time *and* an older one that works with some random chunk of code you inherited from a student in your lab who graduated years ago (?) and is doing something in... maybe the tech world at this point?
+2.  My **favorite** aspect of conda is that you can use it to install non-Python-related software.  For example, you can set up a single or different environments for [NCO][nco-link], [CDO (Climate Data Operators)][cdo-link], and the [NCAR Command Language][ncl-link].  You can even use it to install [ncview][ncview-link]!
 
-Sure, ```pip``` is totally fine!  But I'll let you in on a little secret:  it comes *with* ```conda```, so you may as well go with that instead.
+---
 
-### Hmm... ok, and what about Canopy?  One of my labmates uses that.
+### 2. Mess around with conda and get the hang of it.
 
-I mean, go ahead and try it if you want, but I honestly think of it as a little outdated.  That could be a controversial statement, but here are my reasons for using ```conda```:
+If you're following along, I'd recommend looking at the 20-minute [getting started with conda][conda-tutorial-link] documentation.
 
-1.  With ```conda```, you can install multiple parallel "environments" of Python (or whatever *other* languages you prefer).  That means you can have a new Python you use most of the time and an older one that works with some random chunk of code you inherited from someone who graduated years ago never to be heard from again.
-2.  Building off this first point, you can actually install non-python-related things in these environments, like NCO (NetCDF Operators), CDO (climate data operators), 
+#### 2.1.  
 
-## Step 2.  Mess around with the conda installation and make sure everything looks alright.
-
-If you're following along, I'd recommend looking at the official [getting started with ```conda```](https://conda.io/docs/user-guide/getting-started.html) documentation.
-
-The first thing to do is open up a terminal shell (Terminal on Mac, or my preference:  iTerm2), type ```python```, and hit enter.
+The first thing to do is open up a terminal shell (Terminal on Mac, or my preference:  iTerm2), type ```python```, and hit enter.  If your Anaconda installation was successful, it will show something like this:
 
 ```
 baird$ python
@@ -53,4 +57,42 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-From the lines above, you can see that I'm running Python 3.6.6 via Anaconda.  If you downloaded Anaconda or miniconda and you don't see it above, you may have to mess around with your bash profile.  See [this]() from Stack Overflow.
+From the lines above, you can see that I'm running **Python 3.6.6** via Anaconda.  And by typing ```python``` and hitting return, we've invoked the Python shell, which is denoted by the ```>>>``` line.
+
+> If you downloaded Anaconda or Miniconda and you don't see the output above, it means your terminal probably isn't recognizing ```conda``` as a command, and you need to remind it about the installatin.
+>
+> This is likely related to whether your environment has conda in its path.  The first thing to do is open a *new* terminal shell to see if simply needs to refresh (technically by running your home directory's ```.bash_profile``` or ```.bashrc``` again).  If that doesn't work, it probably means the path to Anaconda/Miniconda wasn't added at installation time.  See [this]() from Stack Overflow.
+
+---
+
+### 3. Install the libraries you'll need most.
+
+
+
+### 4. Open Python from the terminal shell.
+
+### 5. Open a Jupyter Notebook and use this to run Python.
+
+Here's a Jupyter Notebook you can download and open.  To do this download the notebook into a new folder, use the terminal to ```cd``` into that directory, and from that folder invoke notebook by typing ```jupyter notebook``` and hitting return.
+
+
+<!--
+### 6. Use pandas to open a .csv file.
+
+### 7. Make a quick plot of El Niño SSTs.
+
+Check out 1997-1998!  That one was aggressive.
+
+### 8. Save that figure.
+
+### 9. Go get some coffee.
+
+Or grab some tea?  Seriously, you deserve it.  This can be frustrating.
+-->
+
+[conda-tutorial-link]: https://conda.io/docs/user-guide/getting-started.html
+[conda.io]: https://conda.io/docs/user-guide/install/download.html
+[ncview-link]: https://conda.io/docs/user-guide/install/download.html
+[nco-link]: https://conda.io/docs/user-guide/install/download.html
+[ncl-link]: https://conda.io/docs/user-guide/install/download.html
+[cdo-link]: https://conda.io/docs/user-guide/install/download.html
