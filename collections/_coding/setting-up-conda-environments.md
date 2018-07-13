@@ -3,6 +3,8 @@ title: conda environments for NCO, NCL, and CDO
 date: 2018-07-10
 ---
 
+> *Disclaimer:  This assumes knowledge of a conda-based Python installation (e.g., [Anaconda or Miniconda](https://conda.io/docs/index.html)).  I'll add more info on what these are in another post.*
+
 Environments in conda are incredibly useful:  they allow you to install parallel versions of Python and its packages, or even other languages and software, that mind their own business and never affect one another.
 
 In my own research, I actively use several different conda environments to keep everything in its place.  To see what environments you currently have, type ```conda list env```.  You'll have at least one, called the base environment, and the asterisk means it's the current/active environment:
