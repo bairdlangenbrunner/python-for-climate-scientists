@@ -31,7 +31,7 @@ collections:
 collections:
   coding:
     output: true
-#    permalink: /:collection/:name
+    permalink: /:collection/:path/index.html
   pages:
     output: true
 #    permalink: /:name
