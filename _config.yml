@@ -31,7 +31,7 @@ collections:
 collections:
   coding:
     output: true
-    permalink: /:collection/:path 
+    permalink: python-for-climate-scientists/:collection/:name 
   pages:
     output: true
 #    permalink: /:name
