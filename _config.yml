@@ -12,7 +12,7 @@ email: blangenb@uci.edu
 plugins:
   - jekyll-feed
   - jemoji
-  - jekyll-remote-theme
+
 # notes:
 # if you include _coding here, and publish with --drafts,
 # then the _coding/_drafts collection gets published
