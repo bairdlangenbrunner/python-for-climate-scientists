@@ -1,5 +1,6 @@
 ---
 permalink: /coding/index.html
+title: coding tips
 layout: page
 order: 2
 ---
