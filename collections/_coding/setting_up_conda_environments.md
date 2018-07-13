@@ -20,7 +20,7 @@ vcv076219:python-for-climate-scientists baird$
 
 Installing an environment is also a great way to make the switch to a new Python library or package without breaking your installation for all your current scripts.  For example, if you use [basemap][basemap-link] for plotting maps, you may have heard it's [being retired][basemap-sunset] in the next couple years (see also [this discussion][basemap-sunset-forum]).  Its replacement is officially [cartopy][cartopy-link], but when you try to install them both, their packages conflict (or at least they did in the past).  **The solution:  Install a separate cartopy environment to get used to it, and later switch your base environment over to cartopy.**
 
-I typically keep at least four separate environments, described below.  You could get away with putting things like NCO and NCL into your base environment, but I've run into compatibility issues in the past, and I keep them separate to be safe.
+I typically keep at least four separate environments (in addition to the default), described below.  You could get away with putting things like NCO and NCL into your base environment, but I've run into compatibility issues in the past, and I keep them separate to be safe.
 
 |conda environment  |use for      |install commands
 |---                |---          |---
