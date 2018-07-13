@@ -7,7 +7,7 @@ order: 1
 
 Hi, and welcome to **Python for climate scientists**!
 
-This project is in its infancy, and I expected it to evolve quite a bit in the coming months and years.
+This project is in its infancy, and I expect it to evolve quite a bit in the coming months and years.
 
 ![gif](https://media.giphy.com/media/BmmfETghGOPrW/giphy.gif){:width="50%"}
 
