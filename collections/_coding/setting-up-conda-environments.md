@@ -8,7 +8,7 @@ order: 1
 
 Environments in conda are incredibly useful:  they allow you to install parallel versions of Python and its packages, or even other languages and software, that mind their own business and never affect one another.
 
-In my own research, I actively use several different conda environments to keep everything in its place.  To see what environments you currently have, type ```conda list env```.  You'll have at least one, called the base environment, and the asterisk means it's the current/active environment:
+In my own research, I actively use several different conda environments to keep everything in its place.  To see what environments you currently have, type ```conda env list```.  You'll have at least one, called the base environment, and the asterisk means it's the current/active environment:
 
 ```
 conda env list
@@ -20,7 +20,7 @@ base                  *  /Users/baird/miniconda3
 vcv076219:python-for-climate-scientists baird$
 ```
 
-Installing an environment is also a great way to make the switch to a new Python library or package without breaking your installation for all your current scripts.  For example, if you use [basemap][basemap-link] for plotting maps, you may have heard it's [being retired][basemap-sunset] in the next couple years (see also [this discussion][basemap-sunset-forum]).  Its replacement is officially [cartopy][cartopy-link], but when you try to install them both, their packages conflict (or at least they did in the past).  **The solution:  Install a separate cartopy environment to get used to it, and later switch your base environment over to cartopy.**
+Installing an environment is also a great way to make the switch to a new Python library or package without breaking your installation for all your current scripts.  For example, if you use [basemap][basemap-link] for plotting maps, you may have heard it's [being retired][basemap-sunset] in the next couple years (see also [this discussion][basemap-sunset-forum]).  Its replacement is officially [cartopy][cartopy-link], but when you try to install them both, their packages conflict (or at least they did in the past).  **The solution:  Install a separate cartopy environment to get used to it, and once you feel confident, change your base environment to cartopy and create a ```basemap_stable``` environment for basemap-specific tasks.**
 
 I typically keep at least four separate environments (in addition to the default), described below.  You could get away with putting things like NCO and NCL into your base environment, but I've run into compatibility issues in the past, and I keep them separate to be safe.
 
@@ -36,15 +36,24 @@ To create these environments yourself (base is the default), type the following 
 
 ```
 conda create --name nco_stable
-conda create --name ncl_stable
-conda create --name cdo_stable
 ```
+
+Once the environment is created, activate it by typing:
+
+```
+source activate nco_stable
+```
+
+And from here, you can install the package you want within it.  For NCO, that will simply be:
+```
+conda install -c conda-forge nco
+```
+
+Note the ```c``` in ```-c conda-forge``` means "channel."  What this does is tells conda to look in the "conda-forge" channel (which hosts a broader range of user-created packages).  You can see what's installed within each channel when you type ```conda list```.  There will be a 4th column that says the channel if it's not the conda default option.
 
 * To activate an environment: ```source activate env_name```
 * To get back to your default conda:  ```source deactivate```
 * The active environment will have an asterisk next to it in ```conda env list```
-
-> More to come...
 
 [basemap-link]: https://matplotlib.org/basemap/
 [basemap-sunset]: https://matplotlib.org/basemap/users/intro.html
