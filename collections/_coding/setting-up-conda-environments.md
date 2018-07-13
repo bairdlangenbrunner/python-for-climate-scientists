@@ -49,7 +49,37 @@ And from here, you can install the package you want within it.  For NCO, that wi
 conda install -c conda-forge nco
 ```
 
-Note the ```c``` in ```-c conda-forge``` means "channel."  What this does is tells conda to look in the "conda-forge" channel (which hosts a broader range of user-created packages).  You can see what's installed within each channel when you type ```conda list```.  There will be a 4th column that says the channel if it's not the conda default option.
+Note the ```-c``` in ```-c conda-forge``` means "channel."  What this does is tells conda to look in the "conda-forge" channel (which hosts a broader range of user-created packages).  To see what channels were used to install your conda packages, type ```conda list```.  This conveniently lists the packages installed in the current environment, their version and build information, and the channel used to install them.  For packages with nothing under the "Channel" column, they were installed using the defaults channel.  For NCO and other fairly specific software packages, conda will typically need the conda-forge channel.
+
+```
+baird$ conda list
+# packages in environment at /Users/baird/miniconda3/envs/nco_stable:
+#
+# Name                    Version                   Build  Channel
+ca-certificates           2018.4.16                     0    conda-forge
+curl                      7.60.0               h93b3f91_0    conda-forge
+esmf                      7.1.0r                        1    conda-forge
+expat                     2.2.5                hfc679d8_1    conda-forge
+gsl                       2.2.1                h002c638_3
+hdf4                      4.2.13                        0    conda-forge
+hdf5                      1.10.1                        2    conda-forge
+jpeg                      9c                   h470a237_0    conda-forge
+krb5                      1.14.6                        0    conda-forge
+libgcc                    4.8.5               hdbeacc1_10
+libgfortran               3.0.1                h93005f0_2
+libnetcdf                 4.6.1                         2    conda-forge
+libssh2                   1.8.0                h5b517e9_2    conda-forge
+mpi                       1.0                       mpich    conda-forge
+mpich                     3.2.1                h26a2512_4    conda-forge
+nco                       4.7.5                         1    conda-forge
+netcdf-fortran            4.4.4                         7    conda-forge
+openblas                  0.2.20                        8    conda-forge
+openssl                   1.0.2o                        0    conda-forge
+udunits2                  2.2.26                        1    conda-forge
+zlib                      1.2.11               h470a237_3    conda-forge
+```
+
+More about Anaconda/Miniconda channels [here](https://conda.io/docs/user-guide/tasks/manage-channels.html).
 
 * To activate an environment: ```source activate env_name```
 * To get back to your default conda:  ```source deactivate```
