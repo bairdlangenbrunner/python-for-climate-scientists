@@ -1,6 +1,5 @@
 ---
 permalink: /how-to-run-python/
-layout: page
 title: How to run Python
 ---
 

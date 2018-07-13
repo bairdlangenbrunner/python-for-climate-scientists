@@ -1,6 +1,5 @@
 ---
 permalink: /best-practices-matplotlib-figures/
-layout: page
 title: Beset practices for saving Matplotlib figures
 ---
 

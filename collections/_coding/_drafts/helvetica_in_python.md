@@ -1,6 +1,5 @@
 ---
 permalink: /helvetica-in-python/
-layout: page
 title: Helvetica in Python
 ---
 

@@ -1,8 +1,7 @@
 ---
 permalink: /setting-up-environments/
-layout: page
-title: conda environments
-
+title: conda environments for NCO, NCL, and CDO
+date: 2018-07-10
 ---
 
 Environments in conda are incredibly useful:  they allow you to install parallel versions of Python and its packages, or even other languages and software, that mind their own business and never affect one another.
@@ -41,6 +40,8 @@ conda create --name cdo_stable
 * To activate an environment: ```source activate env_name```
 * To get back to your default conda:  ```source deactivate```
 * The active environment will have an asterisk next to it in ```conda env list```
+
+> More to come...
 
 [basemap-link]: https://matplotlib.org/basemap/
 [basemap-sunset]: https://matplotlib.org/basemap/users/intro.html

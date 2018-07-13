@@ -1,13 +1,9 @@
 ---
 permalink: /coding/index.html
 layout: page
-title: coding
-order: 3
+order: 2
 ---
 
-```
-Coming soon...
-```
 <!--
 {% for item in site.pages %}
   <h2>{{ item.title }}</h2>
@@ -21,5 +17,6 @@ Coming soon...
  <!-- <h2>{{ item.title }}</h2>-->
   <!--<p>{{ item.description }}</p>-->
   <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
+  <h2 class="no-underline h4 bold">{{ item.date | date: "%B, %Y" }}</h2>
   <p>{{ item.description }}</p>
 {% endfor %}

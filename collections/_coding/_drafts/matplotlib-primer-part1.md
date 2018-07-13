@@ -1,6 +1,5 @@
 ---
 permalink: /matplotlib-part-2/
-layout: page
 title: Intermediate x-y plots in matplotlib
 ---
 

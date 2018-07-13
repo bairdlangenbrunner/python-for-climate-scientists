@@ -28,18 +28,18 @@ h6, .h6 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; }
 /*inherit*/
 a { color: #006d2c; text-decoration: none; }
 
-a:hover { color: #006d2c; }
+a:hover { color: #002b36; }
 
 pre { margin: 32px 0; width: 100%; white-space: pre-wrap; border-left: 8px solid #006d2c; padding-left: 16px; border-top: solid 2px #eee8d5; border-bottom: solid 2px #eee8d5; border-right: solid 2px #eee8d5; line-height: 1.25; padding-top: 4px; padding-bottom: 4px; }
 
-code { color: #41ab5d; font-size: 15px; }
+code { color: #41ab5d; font-size: 15px; background-color: #eee8d5; padding: 2px 4px; }
 
 .prose p, .prose ol, .prose ul { font-size: 16px; margin-bottom: 1em; width: 100%; }
 @media (min-width: 56em) { .prose p, .prose ol, .prose ul { max-width: 56em; } }
 .prose ul, .prose ol { padding-left: 40px; }
 .prose li { margin-bottom: 0.5em; }
 .prose li ul li, .prose li ol li { margin-bottom: 0; }
-.prose blockquote { border-left: 8px solid #41ab5d; margin: 32px 0; padding-left: 16px; font-size: 16px; }
+.prose blockquote { border-left: 8px solid #006d2c; margin: 32px 0; padding-left: 16px; font-size: 16px; }
 .prose blockquote p { font-size: 16px; }
 .prose hr { color: #002b36; border-style: solid; border-width: thin; margin-top: 0.5em; margin-bottom: 0.5em; }
 .prose dt { font-weight: bold; font-style: italic; line-height: 1.25; }
@@ -263,9 +263,9 @@ code { color: #41ab5d; font-size: 15px; }
 
 .highlight table pre { margin: 0; }
 
-.highlight, .highlight .w { color: #586e75; background-color: #fdf6e3; }
+.highlight, .highlight .w { color: #586e75; background-color: #eee8d5; }
 
-.highlight .err { color: #002b36; background-color: #dc322f; }
+.highlight .err { color: #002b36; background-color: dc322f; }
 
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs { color: #657b83; }
 
