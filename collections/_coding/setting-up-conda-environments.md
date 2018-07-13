@@ -1,6 +1,7 @@
 ---
-title: conda environments for NCO, NCL, and CDO
+title: Conda environments for NCO, NCL, and CDO
 date: 2018-07-10
+order: 1
 ---
 
 > *Disclaimer:  This assumes knowledge of a conda-based Python installation (e.g., [Anaconda or Miniconda](https://conda.io/docs/index.html)).  I'll add more info on what these are in another post.*

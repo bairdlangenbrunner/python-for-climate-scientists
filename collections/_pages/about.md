@@ -24,7 +24,7 @@ More generally, I plan to:
 
 Please check back as I update the site, and <a href="mailto:{{site.email}}">email me</a> if you'd like to get in touch.  I promise to respond eventually.
 
-![gif](https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif){:width=15%"}
+<div style="width:50%">![gif](https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif)</div>
 
 Cheers,  
 Baird
