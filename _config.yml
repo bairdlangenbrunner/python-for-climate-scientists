@@ -31,7 +31,7 @@ collections:
 collections:
   coding:
     output: true
-    permalink: pretty 
+    permalink: /:collection/:path 
   pages:
     output: true
 #    permalink: /:name
