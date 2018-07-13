@@ -59,7 +59,7 @@ code { color: #41ab5d; font-size: 15px; background-color: #eee8d5; }
 
 /* Type utilities */
 .h0 { font-size: 48px; line-height: 0.85em; word-wrap: break-word; }
-@media (min-width: 48em) { .h0 { font-size: 86px; } }
+@media (min-width: 48em) { .h0 { font-size: 84px; } }
 
 .h1, .h2 { word-wrap: break-word; }
 
