@@ -20,7 +20,7 @@ plugins:
 # they apparently count as posts?
 include:
 #  - _posts
-  - _coding
+#  - _coding
   - _pages
 
 collections:
