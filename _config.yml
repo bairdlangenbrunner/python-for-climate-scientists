@@ -5,6 +5,7 @@ remote_theme: "bairdlangenbrunner/swiss"
 theme_color: green-light
 syntax_highlighting: light
 gradient_header: true
+posts_on_homepage: false
 
 author: Baird
 email: blangenb@uci.edu

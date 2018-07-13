@@ -30,6 +30,7 @@ I typically keep at least four separate environments (in addition to the default
 |**basemap_stable** |basmap (assuming you have cartopy in your base environment)  | conda install basemap
 
 To create these environments yourself (base is the default), type the following (choose ```y``` after each).  I like to use the ```_stable``` suffix because it helps me mentally separate an *environment* related to NCO from the language itself.  You can name them anything you like, though.
+
 ```
 conda create --name nco_stable
 conda create --name ncl_stable
