@@ -34,7 +34,7 @@ collections:
     permalink: /:collection/:name
   pages:
     output: true
-    permalink: /:name
+#    permalink: /:name
 
 defaults:
   - scope:
