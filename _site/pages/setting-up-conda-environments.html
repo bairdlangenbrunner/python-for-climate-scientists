@@ -13,7 +13,7 @@
   
   <link rel="stylesheet" href="http://localhost:4000/assets/style.css">
 
-  <link rel="canonical" href="http://localhost:4000/coding/setting-up-conda-environments.html">
+  <link rel="canonical" href="http://localhost:4000/pages/setting-up-conda-environments.html">
   <link rel="alternate" type="application/rss+xml" title="Python for climate scientists" href="http://localhost:4000/feed.xml">
 
   <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -35,6 +35,14 @@ BAIRD NOTE:  this is the navigation bar
   <div class="right sm-width-full">
     <ul class="list-reset mt-lg-1 mb-2 mb-lg-1">
       
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/pages/setting-up-conda-environments.html">
+            conda environments for NCO, NCL, and CDO
+          </a>
+        </li>
+        
       
         
         <li class="inline-block">
@@ -74,6 +82,8 @@ BAIRD NOTE:  this is the navigation bar
       
       
       
+      
+      
         
         <li class="inline-block">
           <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/about/">
@@ -100,13 +110,14 @@ BAIRD NOTE:  this is the navigation bar
 
 
     <div>
-      <article class="container px-2 mx-auto mb4" itemscope itemtype="http://schema.org/BlogPosting">
+      <article class="container mx-auto px-2 mt2 mb4">
 
-  <h1 class="h1 col-9 sm-width-full inline-block" itemprop="name headline">conda environments for NCO, NCL, and CDO</h1>
-  <div class="col-4 sm-width-full mt-1 mb-3 border-top-thin "></div>
+  <header>
+  	<h1 class="h0 mt-3 mb-2 header-title-page">conda environments for NCO, NCL, and CDO</h1>
+  </header>
 
-  <div class="prose" itemprop="articleBody">
-      <p>Environments in conda are incredibly useful:  they allow you to install parallel versions of Python and its packages, or even other languages and software, that mind their own business and never affect one another.</p>
+  <div class="prose mb-4">
+    <p>Environments in conda are incredibly useful:  they allow you to install parallel versions of Python and its packages, or even other languages and software, that mind their own business and never affect one another.</p>
 
 <p>In my own research, I actively use several different conda environments to keep everything in its place.  To see what environments you currently have, type <code class="highlighter-rouge">conda list env</code>.  You’ll have at least one, called the base environment, and the asterisk means it’s the current/active environment:</p>
 
@@ -178,7 +189,6 @@ conda create --name cdo_stable
 
 
   </div>
-
 </article>
 
     </div>
