@@ -9,6 +9,9 @@ posts_on_homepage: false
 
 author: Baird
 email: blangenb@uci.edu
+github_username:  bairdlangenbrunner
+github_repo: swiss-cheese
+timezone: America/Los_Angeles
 
 plugins:
   - jekyll-feed
