@@ -19,7 +19,7 @@ plugins:
 # and they are included in the html front page layout because
 # they apparently count as posts?
 include:
-  - _posts
+#  - _posts
   - _coding
   - _pages
 

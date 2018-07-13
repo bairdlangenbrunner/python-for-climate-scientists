@@ -1,5 +1,4 @@
 ---
-permalink: /setting-up-environments/
 title: conda environments for NCO, NCL, and CDO
 date: 2018-07-10
 ---

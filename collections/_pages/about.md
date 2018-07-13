@@ -1,7 +1,7 @@
 ---
 permalink: /about/
 title: about
-layout: page
+layout: page-no-title
 order: 1
 ---
 
