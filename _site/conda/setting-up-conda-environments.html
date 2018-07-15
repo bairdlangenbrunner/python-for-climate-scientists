@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Conda environments for NCO, NCL, and CDO</title>
+  <meta name="description" content="  Disclaimer:  This assumes knowledge of a conda-based Python installation (e.g., Anaconda or Miniconda).  I’ll add more info on what this is in another post.">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:4000/assets/style.css">
+
+  <link rel="canonical" href="http://localhost:4000/conda/setting-up-conda-environments.html">
+  <link rel="alternate" type="application/rss+xml" title="Python for climate scientists" href="http://localhost:4000/feed.xml">
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+
+  <body>
+
+    <!--
+<header class="border-bottom-thick px-2 clearfix">
+
+BAIRD NOTE:  this is the navigation bar
+
+  <div class="left sm-width-full py-1 mt-1 mt-lg-0">
+    <a class="align-middle link-primary text-accent" href="/">
+      Python for climate scientists
+    </a>
+  </div>
+  <div class="right sm-width-full">
+    <ul class="list-reset mt-lg-1 mb-2 mb-lg-1">
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/about/">
+            about
+          </a>
+        </li>
+        
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/coding/index.html">
+            coding tips
+          </a>
+        </li>
+        
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/where-to-start/">
+            where to start
+          </a>
+        </li>
+        
+      
+    </ul>
+  </div>
+
+</header>
+
+-->
+
+
+<header class="border-bottom-thick px-2 clearfix">
+
+<!-- BAIRD NOTE:  this is the navigation bar -->
+
+  <div class="left sm-width-full py-1">
+    <a class="align-middle link-primary text-accent" href="/">
+      Python for climate scientists
+    </a>
+  </div>
+  <div class="right sm-width-full py-1">
+    <ul class="list-reset">
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/about/">
+            about
+          </a>
+        </li>
+        
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/coding/index.html">
+            coding tips
+          </a>
+        </li>
+        
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/where-to-start/">
+            where to start
+          </a>
+        </li>
+        
+      
+      
+    </ul>
+  </div>
+
+</header>
+
+
+    <div>
+      <article class="container px-2 mx-auto mb" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <h1 class="h1 col-9 sm-width-full inline-block always-full-width-of-container" itemprop="name headline">Conda environments for NCO, NCL, and CDO</h1>
+  <div class="col-4 sm-width-full mt-1 mb-3 border-top-thin "></div>
+
+  <div class="prose" itemprop="articleBody">
+      <blockquote>
+  <p><em>Disclaimer:  This assumes knowledge of a conda-based Python installation (e.g., <a href="https://conda.io/docs/index.html">Anaconda or Miniconda</a>).  I’ll add more info on what this is in another post.</em></p>
+</blockquote>
+
+<p>Environments in conda are incredibly useful.  They allow you to install parallel versions of Python and its packages, or even other languages and software, that mind their own business and never affect one another.</p>
+
+<p>In my own research, I actively use several different conda environments to keep everything in its place.  If you’re up and running with conda, then you can see what environments you currently have by typing <code class="highlighter-rouge">conda env list</code> in a terminal window.  You’ll have at least one, called the base environment, and the asterisk means it’s the current/active environment:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda env list
+
+# conda environments:
+#
+base                  *  /Users/baird/miniconda3
+
+vcv076219:python-for-climate-scientists baird$
+</code></pre></div></div>
+
+<p>This tells me that I currently only have a base environment, and it’s installed on my home directory at <code class="highlighter-rouge">/Users/baird/miniconda3</code>.</p>
+
+<p>Installing an environment is also a great way to make the switch to a new Python library or package without breaking your installation for all your current scripts.  For example, if you use <a href="https://matplotlib.org/basemap/">basemap</a> for plotting maps, you may have heard it’s <a href="https://matplotlib.org/basemap/users/intro.html">being retired</a> in the next couple years (see also <a href="https://github.com/SciTools/cartopy/issues/920">this discussion</a>).  Its replacement is officially <a href="https://scitools.org.uk/cartopy/">cartopy</a>, but when you try to install them both, their packages can conflict.  <strong>The solution:  Install a <em>separate cartopy environment</em> to get used to it, and once you feel confident, change your base environment to cartopy and create a <code class="highlighter-rouge">basemap_stable</code> environment for basemap-specific tasks.</strong>  That’s at least what I did, and I was able to finish projects that I had started with basemap but start new ones in cartopy.</p>
+
+<p>I typically keep at least four separate environments on a machine (in addition to the default), described below.  You could get away with combining some of them into the same one below (and I encourage you to try, because you’ll learn a lot about conda when you run into issues and have to resolve them).  I’ve learned the setup below works best for me.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>conda environment</th>
+      <th>use for</th>
+      <th>install commands</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>base</strong></td>
+      <td>most things</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>nco_stable</strong></td>
+      <td>NCO (NetCDF Operators)</td>
+      <td>conda install -c conda-forge nco</td>
+    </tr>
+    <tr>
+      <td><strong>ncl_stable</strong></td>
+      <td>NCL (NCAR Command Language)</td>
+      <td>conda install -c conda-forge ncl</td>
+    </tr>
+    <tr>
+      <td><strong>cdo_stable</strong></td>
+      <td>CDO (Climate Data Operators)</td>
+      <td>conda install -c conda-forge cdo</td>
+    </tr>
+    <tr>
+      <td><strong>basemap_stable</strong></td>
+      <td>basmap (assuming you have cartopy in your base environment)</td>
+      <td>conda install basemap</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To create these environments yourself (base is the default, so no need to make that), follow the steps below.  I like to use the <code class="highlighter-rouge">_stable</code> suffix because it helps me mentally separate an <em>environment</em> related to NCO from the language itself.  You can name them anything you like, though.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create --name nco_stable
+</code></pre></div></div>
+
+<p>Choose <code class="highlighter-rouge">y</code> when prompted.  Once the environment is created, activate it by typing:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source activate nco_stable
+</code></pre></div></div>
+
+<p>And from here, you can install the package you want within it.  For NCO, that will look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -c conda-forge nco
+</code></pre></div></div>
+
+<p>Note the <code class="highlighter-rouge">-c</code> in <code class="highlighter-rouge">-c conda-forge</code> means “channel.”  What this does is tells conda to look in the “conda-forge” channel (which hosts a broader range of user-created packages and beta versions of official Python packages).  To see what channels were used to install your conda packages, type <code class="highlighter-rouge">conda list</code>.  This conveniently lists the packages installed in the current environment, their version and build information, and the channel used to install them.  For packages with nothing under the “Channel” column, they were installed using the defaults channel.  For NCO and other fairly specific software packages, conda will typically need the conda-forge channel.</p>
+
+<p>This is an example for the <code class="highlighter-rouge">ncl_stable</code> environment.  These are all the packages that conda installed to get NCO on my computer.  (Imagine having to keep all of these, and even more, working compatibly!  This is the true utility of a conda environment.)</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>baird$ conda list
+# packages in environment at /Users/baird/miniconda3/envs/nco_stable:
+#
+# Name                    Version                   Build  Channel
+ca-certificates           2018.4.16                     0    conda-forge
+curl                      7.60.0               h93b3f91_0    conda-forge
+esmf                      7.1.0r                        1    conda-forge
+expat                     2.2.5                hfc679d8_1    conda-forge
+gsl                       2.2.1                h002c638_3
+hdf4                      4.2.13                        0    conda-forge
+hdf5                      1.10.1                        2    conda-forge
+jpeg                      9c                   h470a237_0    conda-forge
+krb5                      1.14.6                        0    conda-forge
+libgcc                    4.8.5               hdbeacc1_10
+libgfortran               3.0.1                h93005f0_2
+libnetcdf                 4.6.1                         2    conda-forge
+libssh2                   1.8.0                h5b517e9_2    conda-forge
+mpi                       1.0                       mpich    conda-forge
+mpich                     3.2.1                h26a2512_4    conda-forge
+nco                       4.7.5                         1    conda-forge
+netcdf-fortran            4.4.4                         7    conda-forge
+openblas                  0.2.20                        8    conda-forge
+openssl                   1.0.2o                        0    conda-forge
+udunits2                  2.2.26                        1    conda-forge
+zlib                      1.2.11               h470a237_3    conda-forge
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="keeping-environments-up-to-date">Keeping environments up-to-date</h3>
+
+<p>Every once in a while, I’ll activate each of my environments and tell conda to update everything to its latest version:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source activate nco_stable
+conda update --all
+</code></pre></div></div>
+
+<p>Then choose <code class="highlighter-rouge">y</code> to approve of the udpates.  Some packages will inevitably be downgraded, but I usually go for it anyway.</p>
+
+
+  </div>
+
+</article>
+
+    </div>
+
+    <div class="border-top-thin clearfix mt-2 mt-lg-4 ">
+  <div class="container mx-auto px-2">
+    <!--<p class="col-8 sm-width-full left py-2 mb-0">This project is maintained by <a class="text-accent" href="https://github.com/bairdlangenbrunner">bairdlangenbrunner</a></p>-->
+    <!--<p class="col-8 left always-full-width-of-container py-2 mb-0">This website is a modification of <a class="text-accent" href="https://github.com/broccolini/swiss">Jekyll Swiss</a> and is maintained by Baird.  Contact me <a class="text-accent" href="mailto:blangenb@uci.edu">here</a>.</p>-->
+    <p class="left always-full-width-of-container py-2 mb-0">This site's design was adapted from <a class="text-accent" href="https://github.com/broccolini/swiss">Jekyll Swiss</a> and is maintained on GitHub <a class="text-accent" href="https://github.com/bairdlangenbrunner/swiss-cheese">here</a>.</p>
+    <!--
+    <ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
+      <li class="inline-block mr-1">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Python for climate scientists">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </li>
+      <li class="inline-block">
+        <a class="github-button" href="https://github.com/bairdlangenbrunner/swiss-cheese" data-icon="octicon-star" data-count-href="bairdlangenbrunner//stargazers" data-count-api="/repos/bairdlangenbrunner/#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star bairdlangenbrunner/ on GitHub">Star</a>
+      </li>
+    -->
+    </ul>
+  </div>
+</div>
+
+
+  </body>
+
+</html>

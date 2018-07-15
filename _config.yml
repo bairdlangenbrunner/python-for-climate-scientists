@@ -4,8 +4,7 @@ remote_theme: "bairdlangenbrunner/swiss"
 
 theme_color: green-light
 syntax_highlighting: light
-gradient_header: true
-posts_on_homepage: false
+gradient_header: false
 
 author: Baird
 email: blangenb@uci.edu
@@ -24,7 +23,8 @@ plugins:
 # they apparently count as posts?
 include:
 #  - _posts
-#  - _coding
+  - _coding
+  - _conda
   - _pages
 
 collections:
@@ -34,6 +34,8 @@ collections:
 
 collections:
   coding:
+    output: true
+  conda:
     output: true
 #    permalink: python-for-climate-scientists/:collection/:path
   pages:
@@ -46,6 +48,11 @@ defaults:
   - scope:
       path: ""
       type: coding
+    values:
+      layout: post-no-date
+  - scope:
+      path: ""
+      type: conda
     values:
       layout: post-no-date
   - scope:

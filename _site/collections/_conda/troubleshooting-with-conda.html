@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Troubleshooting import issues with conda</title>
+  <meta name="description" content="Materials for Earth science data wrangling">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:4000/assets/style.css">
+
+  <link rel="canonical" href="http://localhost:4000/collections/_conda/troubleshooting-with-conda.html">
+  <link rel="alternate" type="application/rss+xml" title="Python for climate scientists" href="http://localhost:4000/feed.xml">
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+
+  <body>
+
+    <!--
+<header class="border-bottom-thick px-2 clearfix">
+
+BAIRD NOTE:  this is the navigation bar
+
+  <div class="left sm-width-full py-1 mt-1 mt-lg-0">
+    <a class="align-middle link-primary text-accent" href="/">
+      Python for climate scientists
+    </a>
+  </div>
+  <div class="right sm-width-full">
+    <ul class="list-reset mt-lg-1 mb-2 mb-lg-1">
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/about/">
+            about
+          </a>
+        </li>
+        
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/coding/index.html">
+            coding tips
+          </a>
+        </li>
+        
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/where-to-start/">
+            where to start
+          </a>
+        </li>
+        
+      
+    </ul>
+  </div>
+
+</header>
+
+-->
+
+
+<header class="border-bottom-thick px-2 clearfix">
+
+<!-- BAIRD NOTE:  this is the navigation bar -->
+
+  <div class="left sm-width-full py-1">
+    <a class="align-middle link-primary text-accent" href="/">
+      Python for climate scientists
+    </a>
+  </div>
+  <div class="right sm-width-full py-1">
+    <ul class="list-reset">
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/about/">
+            about
+          </a>
+        </li>
+        
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/coding/index.html">
+            coding tips
+          </a>
+        </li>
+        
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/where-to-start/">
+            where to start
+          </a>
+        </li>
+        
+      
+      
+    </ul>
+  </div>
+
+</header>
+
+
+    <div>
+      <article class="container mx-auto px-2 mt2 mb4">
+
+  <header>
+  	<h1 class="h0 mt-3 mb-2 header-title-page">Troubleshooting import issues with conda</h1>
+  </header>
+
+  <div class="prose mb-4">
+    <p>I tend to be an early adopter of new libraries and updated packages, but this often leads to package compatibility issues or the accidental wiping of an important library file buried somewhere in my Anaconda/Miniconda installation.  Most frequently, I seem to have trouble with “dylib” files in curl, c++, libpng, and other libraries that conda has installed for various packages.</p>
+
+<p>If you’re getting an <code class="highlighter-rouge">ImportError</code> with a <code class="highlighter-rouge">Reason:  image not found</code> related to some sort of dylib file, you’re not alone.  I encounter this about once a week.</p>
+
+<div style="width:50%">
+![pr gif](https://media.giphy.com/media/ERMGXqtKTDKHC/giphy.gif)</div>
+<p><br /></p>
+
+<p>These are the steps I take to remedy it.  Unfortunately, I haven’t really found a one-size-fits-all solution, so I typically bounce back and forth between some of the steps below till things work again.  My advice here is to be persistent and keep a log of what you’ve done.</p>
+
+<hr />
+
+<ol>
+  <li><strong>Try updating the library.</strong> This happened recently for me when attempting to <code class="highlighter-rouge">import gdal</code>, which itself was failing because of a missing curl library file with an error message referencing a missing file with the name of something similar to <code class="highlighter-rouge">libcurl.4.dylib</code>.
+ So I started by typing:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda upgrade gdal
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Use the conda-forge channel, instead.</strong>  Close Python, reopen it, and try your import statement again.  If it doesn’t work, try using the conda-forge channel instead:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -c conda-forge gdal
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Find the offending libraries.</strong>  Close, reopen, and re-import.  If that doesn’t work, you may need to try to update the specific libraries that are giving trouble (in this case, curl).  For me, I had an idea that it was curl-related, so I went looking for curl-specific libraries.  Type <code class="highlighter-rouge">conda list</code> to see them all and find the one you want.</li>
+</ol>
+
+<ul>
+  <li>I find that I often have <em>both</em> a <code class="highlighter-rouge">curl</code> <em>and</em> a <code class="highlighter-rouge">libcurl</code> packge installed, so you may have to scroll to the <code class="highlighter-rouge">lib*</code> section of the <code class="highlighter-rouge">conda list</code> output (it’s in alphabetical order) to see what related libraries you have.</li>
+</ul>
+
+<ol>
+  <li><strong>Update those libraries.</strong>  Try upgrading those specific libraries with their default branch first.  This would be something like below (substituting <code class="highlighter-rouge">curl</code> and/or <code class="highlighter-rouge">libcurl</code> for whatever your issues are coming from):
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda upgrade curl
+conda upgrade libcurl
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Try conda-forge again.</strong>  Close and re-open Python and try importing things again.  If the issue is still there, I usually try to install a conda-forge version of the packages/libraries, since it’s possible that another person has already encountered this issue and has posted an update on conda-forge.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -c conda-forge curl
+conda install -c conda-forge libcurl
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Move failing library to a new environment or revert to old conda revision.</strong>  If it <strong>STILL</strong> doesn’t work, you may have to move the specific library/package you want to a new environment and use it from there (this has been true in the past for cartopy and basemap, for example).  You can also roll your conda installation back to a revision that worked before, though this will downgrade any updates you’ve added since then.  You can do this by picking out the revision you want:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda list -r
+</code></pre></div>    </div>
+    <p>and the output will list a bunch of revisions and the libraries that were updated for each.</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2018-07-15 11:49:54  (rev 16)
+ cartopy  {0.16.0 -&gt; 0.16.0}
+ gdal  {2.2.2 -&gt; 2.3.0}
+ hdf5  {1.10.1 -&gt; 1.10.2}
+ kealib  {1.4.7 -&gt; 1.4.7}
+ libgdal  {2.2.4 -&gt; 2.3.0}
+ libnetcdf  {4.4.1.1 -&gt; 4.6.1}
+ libspatialite  {4.3.0a -&gt; 4.3.0a}
+ netcdf4  {1.3.1 -&gt; 1.4.0}
+ proj4  {4.9.3 -&gt; 5.0.1}
+ pyproj  {1.9.5.1 -&gt; 1.9.5.1}
+</code></pre></div>    </div>
+    <p>Pick the revision number you want (say I want to revert back to #16 above).  Then install it:</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install --revision 16
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Remove and re-install the library.</strong>  If it <em>still</em> doesn’t work, you may have to remove the library entirely and reinstall it.  This can be an involved process, and conda will typically remove a lot of dependencies and clear out anything that was initially installed with the library.  Then reinstall it.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove curl
+conda install curl
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Last resort:</strong>  A last resort would be either to delete the environment you’re working in or to uninstall Anacona/Miniconda entirely, and then set up everything again, but I tend to avoid this.</li>
+</ol>
+
+  </div>
+</article>
+
+    </div>
+
+    <div class="border-top-thin clearfix mt-2 mt-lg-4 ">
+  <div class="container mx-auto px-2">
+    <!--<p class="col-8 sm-width-full left py-2 mb-0">This project is maintained by <a class="text-accent" href="https://github.com/bairdlangenbrunner">bairdlangenbrunner</a></p>-->
+    <!--<p class="col-8 left always-full-width-of-container py-2 mb-0">This website is a modification of <a class="text-accent" href="https://github.com/broccolini/swiss">Jekyll Swiss</a> and is maintained by Baird.  Contact me <a class="text-accent" href="mailto:blangenb@uci.edu">here</a>.</p>-->
+    <p class="left always-full-width-of-container py-2 mb-0">This site's design was adapted from <a class="text-accent" href="https://github.com/broccolini/swiss">Jekyll Swiss</a> and is maintained on GitHub <a class="text-accent" href="https://github.com/bairdlangenbrunner/swiss-cheese">here</a>.</p>
+    <!--
+    <ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
+      <li class="inline-block mr-1">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Python for climate scientists">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </li>
+      <li class="inline-block">
+        <a class="github-button" href="https://github.com/bairdlangenbrunner/swiss-cheese" data-icon="octicon-star" data-count-href="bairdlangenbrunner//stargazers" data-count-api="/repos/bairdlangenbrunner/#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star bairdlangenbrunner/ on GitHub">Star</a>
+      </li>
+    -->
+    </ul>
+  </div>
+</div>
+
+
+  </body>
+
+</html>

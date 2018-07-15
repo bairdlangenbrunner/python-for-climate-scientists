@@ -3,19 +3,23 @@ title: Helvetica in Python
 order: 2
 ---
 
-> *Disclaimer: The info below has worked for me, but getting nonstandard fonts to work in Python seems to be quite finicky.  I pulled information from [Olga Botvinnik's blog entry on the subject][olga-blog-entry], which is worth reading in its entirety, and have also found a [group lab website][chang-lab-helvetica] that has done similar things.*
+> *Disclaimer: The info below has worked for me, but Python seems to be quite finicky with fonts.  I pulled information from [Olga Botvinnik's blog entry on the subject][olga-blog-entry], which is worth reading in its entirety, and I've also found a [group lab website][chang-lab-helvetica] that has done similar things.  The steps below are a bit more simplified.*
 
-I don't have a lot of complaints about Python and Matplotlib, but something that has always irked me is the default font.  It's currently DejaVu Sans, which looks a little too squat for me when comparing it to other sans serif fonts like Helvetica and Arial.
-
-Here's an example of the current default font (with very large font sizes for emphasis):
+I don't have a lot of complaints about Matplotlib, but something that has always irked me is the default font.  It's currently DejaVu Sans; here it is, in all its squat glory:
 
 <div style="width:60%">![](/figures/fonts/dejavu_sans_example.png)</div>
 
-I know these are small fish I'm frying, but I find this font pretty fugly--especially the numbers on the axes (and the -1 subscript).  They're just... annoyingly wide.
+I know this is a small fish to fry, but I'm not a fan of this font--especially the numbers on the axes (and the -1 subscript).  They're just... annoyingly wide!
 
-Here's what it looks like with Helvetica.  Much better, right?
+---
 
-<div style="width:60%">![](/figures/fonts/helvetica_example.png)</div>
+Here's what it looks like with Helvetica:
+
+<div style="width:60%">![](/Users/baird/Dropbox/_github_repos_personal/python-for-climate-scientists/figures/fonts/helvetica_example.png)</div>
+
+Check out those thinner letters!  Notice those sexier numbers.  I'm into it.
+
+One thing that is still off here, however, is the -1 superscript on the units label.
 
 <div style="width:60%">![](/figures/fonts/helvetica_example_fixed_mathtext.png)</div>
 
