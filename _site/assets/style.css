@@ -48,7 +48,7 @@ code { color: #41ab5d; font-size: 15px; background-color: #eee8d5; }
 .prose dd { font-style: italic; margin-bottom: 0.5em; }
 .prose table { border-collapse: collapse; display: block; width: 100%; margin-bottom: 1.5em; overflow: auto; word-break: normal; word-break: keep-all; }
 .prose table th { font-weight: bold; text-align: left; }
-.prose table th, .prose table td { padding: 16px 32px 16px 2px; border-top: 1px solid #002b36; border-bottom: 1px solid #002b36; }
+.prose table th, .prose table td { padding: 16px 32px 16px 2px; border-top: 1px solid #002b36; border-bottom: 1px solid #002b36; border-left: 1px solid #002b36; border-right: 1px solid #002b36; }
 .prose table tr { background-color: #fdf6e3; border-top: 1px solid #002b36; }
 .prose table tr th { border-top: 2px solid #002b36; border-bottom: 2px solid #002b36; }
 
@@ -101,6 +101,8 @@ code { color: #41ab5d; font-size: 15px; background-color: #eee8d5; }
 .header-title-page { color: #eee8d5; }
 
 .header-text { color: #002b36; }
+
+.header-homepage-text { color: #fdf6e3; font-weight: bold; }
 
 .header-social { fill: #002b36; }
 

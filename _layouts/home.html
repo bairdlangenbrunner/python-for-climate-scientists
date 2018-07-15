@@ -13,18 +13,29 @@
       <header class="header-background">
       {% endif %}
 
-      <div class="clearfix border-bottom-thick header-border">
-        <ul class="list-reset right py-1 header-text font-smoothing">
-          {% assign sorted_pages = site.pages | sort:"order" %}
-          {% for my_page in sorted_pages %}
-            {% if my_page.title %}
-            <li class="inline-block">
-              <a class="align-middle link-primary header-link mr-2" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-            </li>
+      <header class="border-bottom-thick px-2 clearfix">
+        <div class="left sm-width-full py-1">
+          <a class="align-middle header-homepage-text" href="{{ site.baseurl }}/">
+            {{ site.title }}
+          </a>
+        </div>
+        <div class="right sm-width-full py-1">
+          <ul class="list-reset">
+            {% assign sorted_pages = site.pages | sort:"order" %}
+            {% for my_page in sorted_pages %}
+            {% if my_page.order > 0 %}
+              {% if my_page.title %}
+              <li class="inline-block">
+                <a class="align-middle header-homepage-text ml-2 align-left-and-pad-when-small" href="{{ my_page.url | prepend: site.baseurl }}">
+                  {{ my_page.title }}
+                </a>
+              </li>
+              {% endif %}
             {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
+            {% endfor %}
+          </ul>
+        </div>
+      </header>
 
       <div class="container mx-auto px-2 clearfix header-text">
         	<img align="left" src="https://bairdlangenbrunner.github.io/python-for-climate-scientists/jupyter/robinson_map.svg" alt="homolosine" width="100%" style='margin-bottom: 25px'>
@@ -43,7 +54,9 @@
     <div class="container mx-auto px-2 mt-2">
     {% assign sorted_coding_pages = site.conda | sort:"order" %}
     {% for post in sorted_coding_pages %}
+      {% if post.order < 0 %}
       {% include post-block-no-date.html %}
+      {% endif %}
     {% endfor %}
     </div>
 

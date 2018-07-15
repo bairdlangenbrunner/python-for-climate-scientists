@@ -21,7 +21,7 @@ Are you excited yet?!
 
 ### 1. To get Python going, use Anaconda or Miniconda.
 
-I recommend using either [Anaconda or Miniconda][conda.io] to install and use Python.
+I recommend using either **[Anaconda or Miniconda][conda.io]** to install and maintain Python on your machine(s).
 
 > * ```Anaconda``` and ```Miniconda``` are software packages that install the Python language, some other useful packages, and most importantly, ```conda```.
 >
@@ -53,7 +53,7 @@ I can do this as much justics as the half-hour [getting started with conda][cond
 
 ### 3. Install the libraries you'll need most.
 
-If you just installed Anaconda, some of these will already be on your system.  If you installed Miniconda, you've got a more basic installation and will need to grab a few extra things.  My most-used libraries are:
+If you just installed Anaconda, some of these will already be on your system.  If you installed Miniconda, you'll likely need to grab a few extra things.  The most useful libraries for any Python installation are below.  Getting these is a good first step.
 
 | library           | main use
 |---                |---
@@ -61,7 +61,7 @@ If you just installed Anaconda, some of these will already be on your system.  I
 | matplotlib        | plotting
 | jupyter   | Jupyter Notebook and related tools |
 
-Libraries I use that are more specific to Earth science data anlysis include:
+My favorite libraries **more specific to Earth science data analysis include**:
 
 | library           | main use
 |---                |---
@@ -74,7 +74,7 @@ Libraries I use that are more specific to Earth science data anlysis include:
 | seaborn | more plotting options; has a nice color bar builder and interfaces with [ColorBrewer][colorbrewer-link]
 | cmocean | really great colorblind-friendly colormaps  |
 
-You can install these things one at a time:
+You can install these one at a time:
 ```
 conda install matplotlib
 ```
@@ -87,7 +87,8 @@ If you install cartopy, I'd recommend going for the conda-forge channel option:
 ```
 conda install -c conda-forge cartopy
 ```
-This will get you a slightly more stable version, since the folks over at SciTools [seem to recommend this][cartopy-install].
+
+This will get you a slightly more stable version, since the folks over at SciTools seem to [recommend this one for conda-based installation][cartopy-install].
 
 ### 4. Go forth and code
 
@@ -100,11 +101,9 @@ To start up a notebook, you want to navigate to a directory where you'd like to 
 jupyter notebook
 ```
 
-Your default browser will pop up with a window, and you should be good to go.
+If all works smoothly, your default web browser will pop up with a window, and you're good go to.
 
-I recommend skimming the [Jupyter Notebook website][jupyter-notebook-link] and going deep on some Jupyter Notebook tutorials.
-
-Here are some tutorial options:
+I recommend skimming the [Jupyter Notebook documentation][jupyter-notebook-doc] and going deeper on some tutorials from here.  YouTube has plenty of good videos, and here are some website options:
 * Dataquest's [Jupyter Notebook for Beginners](https://www.dataquest.io/blog/jupyter-notebook-tutorial/)
 * An unofficial (but seemingly legitimate) [Quick Start Guide](http://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/)
 * This [Getting Started](https://medium.com/codingthesmartway-com-blog/getting-started-with-jupyter-notebook-for-python-4e7082bd5d46) tutorial on Medium
@@ -168,3 +167,4 @@ Or grab some tea?  Seriously, you deserve it.  This can be frustrating.
 [cdo-link]: https://conda.io/docs/user-guide/install/download.html
 [cartopy-install]: https://scitools.org.uk/cartopy/docs/latest/installing.html#installing
 [colorbrewer-link]: http://colorbrewer2.org/
+[jupyter-notebook-doc]: http://jupyter.readthedocs.io/en/latest/index.html
