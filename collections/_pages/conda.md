@@ -1,8 +1,8 @@
 ---
-permalink: /coding/index.html
-title: coding tips
+permalink: /conda/index.html
+title: conda
 layout: page
-order: 2
+order: 3
 ---
 
 <div class="container mx-auto mt-2">
