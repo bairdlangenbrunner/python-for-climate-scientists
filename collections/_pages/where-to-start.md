@@ -19,7 +19,7 @@ Are you excited yet?!
 
 ---
 
-### 1. To get Python going, use Anaconda or Miniconda.
+### 1. To get Python going, use Anaconda or Miniconda
 
 I recommend using either **[Anaconda or Miniconda][conda.io]** to install and maintain Python on your machine(s).
 
@@ -47,11 +47,11 @@ If you're brand new to Python, Anaconda will probably be a safer bet.  It's a li
 > **"Hmm... ok, and what about Canopy?  I think I met a ghost once who uses it!"**
 > Canopy seems like it could be great, but it's not free to use the full distribution, and the Python community really seems to be gathering around conda these days.
 
-### 2. Mess around with conda and get the hang of it.
+### 2. Mess around with conda and get the hang of it
 
 I can do this as much justics as the half-hour [getting started with conda][conda-tutorial-link] documentation.  That will get you where you need to be.
 
-### 3. Install the libraries you'll need most.
+### 3. Install the libraries you'll need most
 
 If you just installed Anaconda, some of these will already be on your system.  If you installed Miniconda, you'll likely need to grab a few extra things.  The most useful libraries for any Python installation are below.  Getting these is a good first step.
 
