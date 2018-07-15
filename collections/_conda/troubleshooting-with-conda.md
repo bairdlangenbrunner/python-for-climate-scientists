@@ -10,7 +10,9 @@ If you're getting an ```ImportError``` with a ```Reason:  image not found``` rel
 
 ![power rangers gif](https://media.giphy.com/media/ERMGXqtKTDKHC/giphy.gif)
 
-These are the steps I take to remedy it.  Unfortunately, I haven't really found a one-size-fits-all solution, so I typically bounce back and forth between some of the steps below till things work again.  My advice here is to be persistent and keep a log of what you've done.
+These are the steps I take to remedy it.  Unfortunately, I haven't really found a one-size-fits-all solution, so I typically bounce back and forth between some of the steps below till things work again.
+
+**My advice here is to be persistent and keep a log of what you've done.  I keep a text file in my main Dropbox directory titled "useful_conda_notes.txt", and anytime I encounter an issue like that, I log the successes/failures there.**
 
 ---
 
