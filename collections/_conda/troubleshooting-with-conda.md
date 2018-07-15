@@ -8,9 +8,7 @@ I tend to be an early adopter of new libraries and updated packages, but this of
 
 If you're getting an ```ImportError``` with a ```Reason:  image not found``` related to some sort of dylib file, you're not alone.  I encounter this about once a week.
 
-<div style="width:50%">
-![pr gif](https://media.giphy.com/media/ERMGXqtKTDKHC/giphy.gif)</div>
-<br>
+![power rangers gif](https://media.giphy.com/media/ERMGXqtKTDKHC/giphy.gif)
 
 These are the steps I take to remedy it.  Unfortunately, I haven't really found a one-size-fits-all solution, so I typically bounce back and forth between some of the steps below till things work again.  My advice here is to be persistent and keep a log of what you've done.
 
