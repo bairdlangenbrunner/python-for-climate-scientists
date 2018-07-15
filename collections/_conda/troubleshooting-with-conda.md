@@ -14,34 +14,41 @@ These are the steps I take to remedy it.  Unfortunately, I haven't really found 
 
 ---
 
-1. **Try updating the library.** This happened recently for me when attempting to ```import gdal```, which itself was failing because of a missing curl library file with an error message referencing a missing file with the name of something similar to ```libcurl.4.dylib```.
- So I started by typing:
+**1. Try updating the library.** A dylib error happened recently for me when executing ```import gdal``` in Python.  The error message told me this was failing because of a missing ```curl``` library file with an error message referencing a missing file with the name of something similar to ```libcurl.4.dylib```.  My first assumption is that ```gdal``` is simply a little outdated, and the first step is to try upgrading it.
 ```
 conda upgrade gdal
 ```
 
-1. **Use the conda-forge channel, instead.**  Close Python, reopen it, and try your import statement again.  If it doesn't work, try using the conda-forge channel instead:
+Test if this worked by closing Python, reopening it, and running the problematic command.
+
+**2. Use the conda-forge channel, instead.**  If it doesn't work, try using the conda-forge channel to update the library, instead.  In this case, you don't use the ```upgrade``` syntax, but rather issue a new install command:
 ```
 conda install -c conda-forge gdal
 ```
 
-1.  **Find the offending libraries.**  Close, reopen, and re-import.  If that doesn't work, you may need to try to update the specific libraries that are giving trouble (in this case, curl).  For me, I had an idea that it was curl-related, so I went looking for curl-specific libraries.  Type ```conda list``` to see them all and find the one you want.
+Again, check if it works by restarting Python and trying the import command.
 
-  * I find that I often have *both* a ```curl``` *and* a ```libcurl``` packge installed, so you may have to scroll to the ```lib*``` section of the ```conda list``` output (it's in alphabetical order) to see what related libraries you have.
+Still no dice?  This tells you that the issue is lurking deeper in the libraries that ```gdal``` *depends on*.  Based on the error message, you can usually get a good sense of which library is causing it.  In my case, the clue was the **libcurl.4.dylib** syntax; looks like ```curl``` is the real culprit, so I'll try and fix that.
 
-1. **Update those libraries.**  Try upgrading those specific libraries with their default branch first.  This would be something like below (substituting ```curl``` and/or ```libcurl``` for whatever your issues are coming from):
+**3. Find the offending libraries.**  List the libraries in the current environment and see if any look like they're related to the error message.  Do this by typing ```conda list```.
+
+  * In this case, I found *both* the main ```curl``` library *and* ```libcurl``` installed.  This secondary library is probably where the problem actually resides, but updating ```curl``` will typically take care of it.
+
+**4. Update those libraries.**  Try upgrading those specific libraries using the default channel.  The second line may not be necessary always, since a ```curl``` update should take care of ```libcurl```:
 ```
 conda upgrade curl
 conda upgrade libcurl
 ```
 
-1. **Try conda-forge again.**  Close and re-open Python and try importing things again.  If the issue is still there, I usually try to install a conda-forge version of the packages/libraries, since it's possible that another person has already encountered this issue and has posted an update on conda-forge.
+Again, close/reopen your Python shell and try out the import statement.
+
+**5. Try conda-forge again.**  If the issue is still there, I try to install a conda-forge version of the packages/libraries, since it's possible that another person has already encountered this issue and has posted an update on that channel.
 ```
 conda install -c conda-forge curl
 conda install -c conda-forge libcurl
 ```
 
-1.  **Move failing library to a new environment or revert to old conda revision.**  If it **STILL** doesn't work, you may have to move the specific library/package you want to a new environment and use it from there (this has been true in the past for cartopy and basemap, for example).  You can also roll your conda installation back to a revision that worked before, though this will downgrade any updates you've added since then.  You can do this by picking out the revision you want:
+**6. Move library to a new environment or revert to old conda revision.**  If it **STILL** doesn't work, you may have to move the specific library/package you want to a new environment and use it from there (this has been true in the past for cartopy and basemap, for example).  You can also roll your conda installation back to an older version, if you had it working before, though this will downgrade any updates you've added since then.  You can do this by picking out the revision you want:
 ```
 conda list -r
 ```
@@ -59,15 +66,17 @@ and the output will list a bunch of revisions and the libraries that were update
      proj4  {4.9.3 -> 5.0.1}
      pyproj  {1.9.5.1 -> 1.9.5.1}
 ```
-Pick the revision number you want (say I want to revert back to #16 above).  Then install it:
+Pick the revision number you want (say I want to revert back to #16 above) and install it:
 ```
 conda install --revision 16
 ```
 
-1. **Remove and re-install the library.**  If it *still* doesn't work, you may have to remove the library entirely and reinstall it.  This can be an involved process, and conda will typically remove a lot of dependencies and clear out anything that was initially installed with the library.  Then reinstall it.
+**7. Remove and re-install the library.**  If it *still* doesn't work, you may have to remove the library entirely and reinstall it.  This can be an involved process, but it's typically where I end up if nothing else works.  Depending on what is giving the import errors, you may want to remove just ```curl``` or get rid of ```gdal``` and ```curl``` altogether.
 ```
+conda remove gdal
 conda remove curl
-conda install curl
 ```
 
-1. **Last resort:**  A last resort would be either to delete the environment you're working in or to uninstall Anacona/Miniconda entirely, and then set up everything again, but I tend to avoid this.
+---
+
+Good luck!  You've got this.
