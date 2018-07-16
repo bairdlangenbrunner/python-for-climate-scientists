@@ -11,7 +11,7 @@ I've set this up to document my experience using Python for data analysis and pl
 
 This project is in its infancy, and I expect it to evolve in the coming months and years.  Please let me know if you want to be part of it, or if you'd like to see something specific here.
 
-![gif](https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif)
+<!--![gif](https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif)-->
 
 Thanks  
 Baird
