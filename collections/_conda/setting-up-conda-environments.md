@@ -1,7 +1,6 @@
 ---
 title: Conda environments for NCO, NCL, and CDO
 date: 2018-07-10
-permalink: /:collection/:name/
 order: 1
 ---
 
@@ -102,4 +101,4 @@ Then choose ```y``` to approve of the udpates.  Some packages will inevitably be
 [basemap-sunset]: https://matplotlib.org/basemap/users/intro.html
 [basemap-sunset-forum]: https://github.com/SciTools/cartopy/issues/920
 [cartopy-link]: https://scitools.org.uk/cartopy/
-[where-to-start-page]:
+[where-to-start-page]: https://bairdlangenbrunner.github.io/python-for-climate-scientists/where-to-start/

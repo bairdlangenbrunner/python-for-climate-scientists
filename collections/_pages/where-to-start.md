@@ -89,7 +89,7 @@ If you install cartopy, I'd recommend going for the conda-forge channel option (
 conda install -c conda-forge cartopy
 ```
 
-> *Warning:  I think ```cartopy``` is the best option for geospatial plotting, since it's the replacement for the soon-to-be-retired ```basemap``` and will give you less grief down the line.  But if you're inheriting code from others, or if you simply prefer basemap for one reason or another, they don't work well together (the short reason: ```cartopy``` uses a package called ```shapely```, and ```basemap``` doesn't work with it installed).  Long story short, you'll have to pick just one on your default environment.*
+> *Warning:  I think ```cartopy``` is the best option for geospatial plotting, since it's the replacement for the soon-to-be-retired ```basemap``` and will give you less grief down the line.  But if you're inheriting code from others, or if you simply prefer ```basemap``` for one reason or another, they don't work well together (the short reason: ```cartopy``` uses a package called ```shapely```, and ```basemap``` doesn't work with it installed).  So you'll have to pick just one on your default environment.*
 
 ### 4. Go forth and code
 

@@ -132,7 +132,7 @@ BAIRD NOTE:  this is the navigation bar
 
 <p>These are the steps I take to remedy it.  Unfortunately, I haven’t really found a one-size-fits-all solution, so I typically bounce back and forth between some of the steps below till things work again.</p>
 
-<p><strong>My advice here is to be persistent and keep a log of what you’ve done.  I keep a text file in my main Dropbox directory titled “useful_conda_notes.txt”, and anytime I encounter an issue like that, I log the successes/failures there.</strong></p>
+<p><strong>My advice here is to be persistent and keep a log of what you’ve done.</strong>  I keep a text file in my main Dropbox directory titled “useful_conda_notes.txt”, and any time I encounter an issue like that, I log the successes/failures there.</p>
 
 <hr />
 
@@ -142,6 +142,8 @@ BAIRD NOTE:  this is the navigation bar
 
 <p>Test if this worked by closing Python, reopening it, and running the problematic command.</p>
 
+<hr />
+
 <p><strong>2. Use the conda-forge channel, instead.</strong>  If it doesn’t work, try using the conda-forge channel to update the library, instead.  In this case, you don’t use the <code class="highlighter-rouge">upgrade</code> syntax, but rather issue a new install command:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -c conda-forge gdal
 </code></pre></div></div>
@@ -150,11 +152,15 @@ BAIRD NOTE:  this is the navigation bar
 
 <p>Still no dice?  This tells you that the issue is lurking deeper in the libraries that <code class="highlighter-rouge">gdal</code> <em>depends on</em>.  Based on the error message, you can usually get a good sense of which library is causing it.  In my case, the clue was the <strong>libcurl.4.dylib</strong> syntax; looks like <code class="highlighter-rouge">curl</code> is the real culprit, so I’ll try and fix that.</p>
 
+<hr />
+
 <p><strong>3. Find the offending libraries.</strong>  List the libraries in the current environment and see if any look like they’re related to the error message.  Do this by typing <code class="highlighter-rouge">conda list</code>.</p>
 
 <ul>
   <li>In this case, I found <em>both</em> the main <code class="highlighter-rouge">curl</code> library <em>and</em> <code class="highlighter-rouge">libcurl</code> installed.  This secondary library is probably where the problem actually resides, but updating <code class="highlighter-rouge">curl</code> will typically take care of it.</li>
 </ul>
+
+<hr />
 
 <p><strong>4. Update those libraries.</strong>  Try upgrading those specific libraries using the default channel.  The second line may not be necessary always, since a <code class="highlighter-rouge">curl</code> update should take care of <code class="highlighter-rouge">libcurl</code>:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda upgrade curl
@@ -163,10 +169,14 @@ conda upgrade libcurl
 
 <p>Again, close/reopen your Python shell and try out the import statement.</p>
 
+<hr />
+
 <p><strong>5. Try conda-forge again.</strong>  If the issue is still there, I try to install a conda-forge version of the packages/libraries, since it’s possible that another person has already encountered this issue and has posted an update on that channel.</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -c conda-forge curl
 conda install -c conda-forge libcurl
 </code></pre></div></div>
+
+<hr />
 
 <p><strong>6. Move library to a new environment or revert to old conda revision.</strong>  If it <strong>STILL</strong> doesn’t work, you may have to move the specific library/package you want to a new environment and use it from there (this has been true in the past for cartopy and basemap, for example).  You can also roll your conda installation back to an older version, if you had it working before, though this will downgrade any updates you’ve added since then.  You can do this by picking out the revision you want:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda list -r
@@ -188,9 +198,14 @@ conda install -c conda-forge libcurl
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install --revision 16
 </code></pre></div></div>
 
-<p><strong>7. Remove and re-install the library.</strong>  If it <em>still</em> doesn’t work, you may have to remove the library entirely and reinstall it.  This can be an involved process, but it’s typically where I end up if nothing else works.  Depending on what is giving the import errors, you may want to remove just <code class="highlighter-rouge">curl</code> or get rid of <code class="highlighter-rouge">gdal</code> and <code class="highlighter-rouge">curl</code> altogether.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove gdal
-conda remove curl
+<hr />
+
+<p><strong>7. Remove and re-install the library.</strong>  If it <em>still</em> doesn’t work, you may have to remove the library entirely and reinstall it.  This can be an involved process, but it’s typically where I end up if nothing else works.  Depending on my level of frustration, sometimes I just take a “scorched Earth approach” get rid of all the things that seem wrong.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove gdal curl
+</code></pre></div></div>
+
+<p>Then reinstall them, hopefully in a working manner:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install gdal curl
 </code></pre></div></div>
 
 <hr />
