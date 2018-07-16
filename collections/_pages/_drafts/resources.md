@@ -9,6 +9,10 @@ order: 2
 Coming soon...
 ```
 
+aospy - Spencer Hill folks; Johnny Lin
+py-Earth
+
+
 <!--
 Some of my favorite online resources are listed below.
 

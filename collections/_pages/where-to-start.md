@@ -15,11 +15,11 @@ Are you excited yet?!
 
 ![doge](https://media.giphy.com/media/9gn4lhW6wiQ6c/giphy.gif)
 
-> *One note before I go further:  Most of the tips here are based on my experience with Mac OS, but if you're a Windows or LINUX user, use this resource with other documentation specific to your OS.*
+> *Note:  Most of the tips here are based on experience with Mac OS.  If you're a Windows or LINUX user, use this resource with other documentation specific to your OS.*
 
 ---
 
-### 1. To get Python going, use Anaconda or Miniconda
+### 1. To install Python, start with Anaconda or Miniconda
 
 I recommend using either **[Anaconda or Miniconda][conda.io]** to install and maintain Python on your machine(s).
 
@@ -31,10 +31,10 @@ I recommend using either **[Anaconda or Miniconda][conda.io]** to install and ma
 If you're brand new to Python, Anaconda will probably be a safer bet.  It's a little bulky and will take a little longer to install, but it will also give you the most options while learning the language.  Miniconda is a stripped down version of Anaconda, so if you don't have much disk space, go with that.  Personally, I like Miniconda, since it's more lightweight for laptops, shared computers, or login nodes where disk space is limited.
 
 #### Why conda?
-> 1.  This is getting a little ahead of myself, but with conda, you can install multiple parallel "environments" of Python (or whatever *other* languages you prefer).  That means you can have a Python installation you use most of the time *and* an older one that works with some random chunk of code you inherited from a student in your lab who graduated years ago.
+> 1.  This is getting a little ahead of myself, but with conda, you can install multiple parallel "environments" of Python (or whatever *other* languages you prefer).  That means you can have a Python installation you use most of the time *and* an older one that works with some random chunk of code you inherited from someone else who worked on an older version of Python.
 >
 >
-> 2.  Another powerful aspect of conda is that you can use it to install non-Python-related software.  For example, you can set up a single or different environments for [NCO (NetCDF Operators)][nco-link], [CDO (Climate Data Operators)][cdo-link], and the [NCL (NCAR Command Language)][ncl-link].  This, in my opinion, is what makes it so valuable.
+> 2.  Another powerful aspect of conda is that you can use it to install non-Python-related software.  For example, you can set up a single or different environments for [NCO (NetCDF Operators)][nco-link], [CDO (Climate Data Operators)][cdo-link], and the [NCL (NCAR Command Language)][ncl-link].  This, in my opinion, is what makes it so valuable; see my separate post on [setting up these environments][setting-up-conda-environments-post] for more information.
 >
 >
 > 3. Anaconda/Miniconda are free (their developer, Continuum, offers proprietary add-ons, but there's no reason you'll ever need those).
@@ -108,6 +108,10 @@ I recommend skimming the [Jupyter Notebook documentation][jupyter-notebook-doc] 
 * An unofficial (but seemingly legitimate) [Quick Start Guide](http://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/)
 * This [Getting Started](https://medium.com/codingthesmartway-com-blog/getting-started-with-jupyter-notebook-for-python-4e7082bd5d46) tutorial on Medium
 
+### 5.  Optional: Read about how to set up some useful conda environments
+
+Check out my approach on [setting up NCO, CDO, and NCL][conda-environments-page] using conda alone.
+
 <!--
 #### 2.1.  
 
@@ -168,3 +172,4 @@ Or grab some tea?  Seriously, you deserve it.  This can be frustrating.
 [cartopy-install]: https://scitools.org.uk/cartopy/docs/latest/installing.html#installing
 [colorbrewer-link]: http://colorbrewer2.org/
 [jupyter-notebook-doc]: http://jupyter.readthedocs.io/en/latest/index.html
+[conda-environments-page]: https://bairdlangenbrunner.github.io/python-for-climate-scientists/conda/setting-up-conda-environments.html

@@ -1,10 +1,11 @@
 ---
 title: Conda environments for NCO, NCL, and CDO
 date: 2018-07-10
+permalink: /:collection/:name/
 order: 1
 ---
 
-> *Disclaimer:  This assumes knowledge of a conda-based Python installation (e.g., [Anaconda or Miniconda](https://conda.io/docs/index.html)).  I'll add more info on what this is in another post.*
+> *Disclaimer:  This assumes knowledge of a conda-based Python installation (e.g., [Anaconda or Miniconda](https://conda.io/docs/index.html)).  Read through the documentation websites or the [where to start][where-to-start-page] page to learn more about this.*
 
 Environments in conda are incredibly useful.  They allow you to install parallel versions of Python and its packages, or even other languages and software, that mind their own business and never affect one another.
 
@@ -101,3 +102,4 @@ Then choose ```y``` to approve of the udpates.  Some packages will inevitably be
 [basemap-sunset]: https://matplotlib.org/basemap/users/intro.html
 [basemap-sunset-forum]: https://github.com/SciTools/cartopy/issues/920
 [cartopy-link]: https://scitools.org.uk/cartopy/
+[where-to-start-page]:
