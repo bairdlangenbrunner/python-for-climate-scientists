@@ -143,7 +143,7 @@ BAIRD NOTE:  this is the navigation bar
 
 <hr>
 
-<h3 id="1-to-install-python-start-with-anaconda-or-miniconda">1. To install Python, start with Anaconda or Miniconda</h3>
+<h3 id="1-to-get-python-working-install-anaconda-or-miniconda">1. To get Python working, install Anaconda or Miniconda</h3>
 
 <p>I recommend using either <strong><a href="https://conda.io/docs/user-guide/install/download.html">Anaconda or Miniconda</a></strong> to install and maintain Python on your machine(s).</p>
 
@@ -153,12 +153,15 @@ BAIRD NOTE:  this is the navigation bar
       <p><code class="highlighter-rouge">Anaconda</code> and <code class="highlighter-rouge">Miniconda</code> are software packages that install the Python language, some other useful packages, and most importantly, <code class="highlighter-rouge">conda</code>.</p>
     </li>
     <li>
-      <p><code class="highlighter-rouge">conda</code> itself is an open source package manager that was built in Python and helps keep all of its libraries compatible.  (Well, it was originally built for Python, but it’s technically language-agnostic. so if you find yourself using other open-source languages like R or Julia often, conda is a great way to maintain them.)</p>
+      <p><code class="highlighter-rouge">conda</code> itself is an open source package manager that was built in Python and helps keep all of its libraries compatible.  (Well, it was originally built for Python, but it’s technically language-agnostic. So if you find yourself using other open-source languages like R or Julia often, conda is a great way to maintain them.)</p>
     </li>
   </ul>
 </blockquote>
 
-<p>If you’re brand new to Python, Anaconda will probably be a safer bet.  It’s a little bulky and will take a little longer to install, but it will also give you the most options while learning the language.  Miniconda is a stripped down version of Anaconda, so if you don’t have much disk space, go with that.  Personally, I like Miniconda, since it’s more lightweight for laptops, shared computers, or login nodes where disk space is limited.</p>
+<h4 id="should-i-download-anaconda-or-miniconda">Should I download Anaconda or Miniconda?</h4>
+<blockquote>
+  <p>If you’re brand new to Python, Anaconda will probably be a safer bet.  It’s a little bulky and will take a little longer to install, but it will also give you the most options while learning the language.  Miniconda is a stripped down version of Anaconda, so if you don’t have much disk space, go with that.  Personally, I like Miniconda, since it’s more lightweight for laptops, shared computers, or login nodes where disk space is limited.</p>
+</blockquote>
 
 <h4 id="why-conda">Why conda?</h4>
 <blockquote>
@@ -167,7 +170,7 @@ BAIRD NOTE:  this is the navigation bar
       <p>This is getting a little ahead of myself, but with conda, you can install multiple parallel “environments” of Python (or whatever <em>other</em> languages you prefer).  That means you can have a Python installation you use most of the time <em>and</em> an older one that works with some random chunk of code you inherited from someone else who worked on an older version of Python.</p>
     </li>
     <li>
-      <p>Another powerful aspect of conda is that you can use it to install non-Python-related software.  For example, you can set up a single or different environments for <a href="https://conda.io/docs/user-guide/install/download.html">NCO (NetCDF Operators)</a>, <a href="https://conda.io/docs/user-guide/install/download.html">CDO (Climate Data Operators)</a>, and the <a href="https://conda.io/docs/user-guide/install/download.html">NCL (NCAR Command Language)</a>.  This, in my opinion, is what makes it so valuable; see my separate post on [setting up these environments][setting-up-conda-environments-post] for more information.</p>
+      <p>Another powerful aspect of conda is that you can use it to install non-Python-related software.  For example, you can set up a single or different environments for <a href="https://conda.io/docs/user-guide/install/download.html">NCO (NetCDF Operators)</a>, <a href="https://conda.io/docs/user-guide/install/download.html">CDO (Climate Data Operators)</a>, and the <a href="https://conda.io/docs/user-guide/install/download.html">NCL (NCAR Command Language)</a>.  This, in my opinion, is what makes it so valuable; see the post on <a href="https://bairdlangenbrunner.github.io/python-for-climate-scientists/conda/setting-up-conda-environments.html">setting up these environments</a> for more information.</p>
     </li>
     <li>
       <p>Anaconda/Miniconda are free (their developer, Continuum, offers proprietary add-ons, but there’s no reason you’ll ever need those).</p>
@@ -178,7 +181,7 @@ BAIRD NOTE:  this is the navigation bar
 <h4 id="alternatives-to-anacondaminiconda">Alternatives to Anaconda/Miniconda</h4>
 <blockquote>
   <p><strong>“So what about pip for installing Python?  I know someone who seems to prefer that.”</strong>
-Sure, pip is totally fine!  But I’ll let you in on a little secret:  it comes <em>with</em> Anaconda and Miniconda, so you may as well go with one of those instead.</p>
+Sure, pip is great!  But for what it’s worth, pip comes <em>with</em> Anaconda and Miniconda, so you may as well go with one of those instead.  They work fairly well together.</p>
 
   <p><strong>“Hmm… ok, and what about Canopy?  I think I met a ghost once who uses it!”</strong>
 Canopy seems like it could be great, but it’s not free to use the full distribution, and the Python community really seems to be gathering around conda these days.</p>
@@ -186,11 +189,11 @@ Canopy seems like it could be great, but it’s not free to use the full distrib
 
 <h3 id="2-mess-around-with-conda-and-get-the-hang-of-it">2. Mess around with conda and get the hang of it</h3>
 
-<p>I can do this as much justics as the half-hour <a href="https://conda.io/docs/user-guide/getting-started.html">getting started with conda</a> documentation.  That will get you where you need to be.</p>
+<p>Alright, now that you’ve decided which one you want, install it and start learning about conda.  I can’t do this as much justice as the half-hour <a href="https://conda.io/docs/user-guide/getting-started.html">getting started with conda</a> documentation.  That will get you where you need to be.</p>
 
 <h3 id="3-install-the-libraries-youll-need-most">3. Install the libraries you’ll need most</h3>
 
-<p>If you just installed Anaconda, some of these will already be on your system.  If you installed Miniconda, you’ll likely need to grab a few extra things.  The most useful libraries for any Python installation are below.  Getting these is a good first step.</p>
+<p>If you have Anaconda, some of these will already be on your system.  If instead you went with Miniconda, you’ll likely need to grab a few extra things.  The most useful libraries for any Python installation are below.  I think of this table as the top four:</p>
 
 <table>
   <thead>
@@ -215,7 +218,7 @@ Canopy seems like it could be great, but it’s not free to use the full distrib
   </tbody>
 </table>
 
-<p>My favorite libraries <strong>more specific to Earth science data analysis include</strong>:</p>
+<p>My favorite libraries <strong>more specific to Earth science data analysis</strong> include:</p>
 
 <table>
   <thead>
@@ -268,11 +271,13 @@ Canopy seems like it could be great, but it’s not free to use the full distrib
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install numpy scipy matplotlib pandas xarray jupyter
 </code></pre></div></div>
 
-<p>If you install cartopy, I’d recommend going for the conda-forge channel option:</p>
+<p>If you install cartopy, I’d recommend going for the conda-forge channel option (per <a href="https://scitools.org.uk/cartopy/docs/latest/installing.html#installing">the recommendation of the folks over at SciTools</a>, who develop it):</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -c conda-forge cartopy
 </code></pre></div></div>
 
-<p>This will get you a slightly more stable version, since the folks over at SciTools seem to <a href="https://scitools.org.uk/cartopy/docs/latest/installing.html#installing">recommend this one for conda-based installation</a>.</p>
+<blockquote>
+  <p><em>Warning:  I think <code class="highlighter-rouge">cartopy</code> is the best option for geospatial plotting, since it’s the replacement for the soon-to-be-retired <code class="highlighter-rouge">basemap</code> and will give you less grief down the line.  But if you’re inheriting code from others, or if you simply prefer basemap for one reason or another, they don’t work well together (the short reason: <code class="highlighter-rouge">cartopy</code> uses a package called <code class="highlighter-rouge">shapely</code>, and <code class="highlighter-rouge">basemap</code> doesn’t work with it installed).  Long story short, you’ll have to pick just one on your default environment.</em></p>
+</blockquote>
 
 <h3 id="4-go-forth-and-code">4. Go forth and code</h3>
 
