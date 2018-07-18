@@ -23,10 +23,8 @@ Are you excited yet?!
 
 I recommend using either **[Anaconda or Miniconda][conda.io]** to install and maintain Python on your machine(s).
 
-> * ```Anaconda``` and ```Miniconda``` are software packages that install the Python language, some other useful packages, and most importantly, ```conda```.
->
->
-> * ```conda``` itself is an open source package manager that was built in Python and helps keep all of its libraries compatible.  (Well, it was originally built for Python, but it's technically language-agnostic. So if you find yourself using other open-source languages like R or Julia often, conda is a great way to maintain them.)
+* ```Anaconda``` and ```Miniconda``` are software packages that install the Python language, some other useful packages, and most importantly, ```conda```.
+* ```conda``` itself is an open source package manager that was built in Python and helps keep all of its libraries compatible.  (Well, it was originally built for Python, but it's technically language-agnostic. So if you find yourself using other open-source languages like R or Julia often, conda is a great way to maintain them.)
 
 #### Should I download Anaconda or Miniconda?
 > If you're brand new to Python, Anaconda will probably be a safer bet.  It's a little bulky and will take a little longer to install, but it will also give you the most options while learning the language.  Miniconda is a stripped down version of Anaconda, so if you don't have much disk space, go with that.  Personally, I like Miniconda, since it's more lightweight for laptops, shared computers, or login nodes where disk space is limited.
@@ -42,7 +40,7 @@ I recommend using either **[Anaconda or Miniconda][conda.io]** to install and ma
 
 #### Alternatives to Anaconda/Miniconda
 > **"So what about pip for installing Python?  I know someone who seems to prefer that."**
-> Sure, pip is great!  But for what it's worth, pip comes *with* Anaconda and Miniconda, so you may as well go with one of those instead.  They work fairly well together.
+> Sure, pip is great!  But for what it's worth, pip comes *with* Anaconda and Miniconda, so you may as well go with one of those instead.  They work well together.
 >
 >
 > **"Hmm... ok, and what about Canopy?  I think I met a ghost once who uses it!"**
@@ -54,7 +52,7 @@ Alright, now that you've decided which one you want, install it and start learni
 
 ### 3. Install the libraries you'll need most
 
-If you have Anaconda, some of these will already be on your system.  If instead you went with Miniconda, you'll likely need to grab a few extra things.  The most useful libraries for any Python installation are below.  I think of this table as the top four:
+If you have Anaconda, some of these will already be on your system.  If instead you went with Miniconda, you'll likely need to grab a few extra things.  The most useful libraries for any Python installation are below:
 
 | library           | main use
 |---                |---
@@ -62,7 +60,7 @@ If you have Anaconda, some of these will already be on your system.  If instead 
 | matplotlib        | plotting
 | jupyter   | Jupyter Notebook and related tools |
 
-My favorite libraries **more specific to Earth science data analysis** include:
+My favorites **more specific to Earth science data analysis** include:
 
 | library           | main use
 |---                |---
@@ -73,7 +71,7 @@ My favorite libraries **more specific to Earth science data analysis** include:
 | gdal       | library and packages for the Geospatial Data Abstraction Library; useful for reading in HDF and geotiff files (remote sensing data sets)
 | wrf-python        | wrapper for Fortran functions that analyze WRF output
 | seaborn | more plotting options; has a nice color bar builder and interfaces with [ColorBrewer][colorbrewer-link]
-| cmocean | really great colorblind-friendly colormaps  |
+| cmocean | really great color blind-friendly colormaps  |
 
 You can install these one at a time:
 ```
@@ -95,7 +93,7 @@ conda install -c conda-forge cartopy
 
 Make sure you install the four packages in the first table above (```numpy```, ```scipy```, ```matplotlib```, and ```jupyter```).  This will get you the main ingredients you need to get familiar with Python.
 
-Probably the easiest way to learn the language is using Jupyter Notebook, which takes Python and puts it into a browser window and lets you add notes, images, and even Latex to document your workflow.
+Probably the easiest way to learn the language is using Jupyter Notebook, which takes Python and ports it through a browser window, providing a great interface where you can add notes, images, and even Latex to document your workflow.
 
 To start up a notebook, you want to navigate to a directory where you'd like to save it on your computer, then type:
 ```
@@ -112,6 +110,8 @@ I recommend skimming the [Jupyter Notebook documentation][jupyter-notebook-doc] 
 ### 5.  Optional: Read about how to set up some useful conda environments
 
 Check out my approach on [setting up NCO, CDO, and NCL][conda-environments-page] using conda alone.
+
+### 6.  A handful of students and postdocs are actively managing a [tutorial series for Python](https://github.com/raspstephan/ESS-Python-Tutorial).  Download the repository and work your way through the lessons; they're designed to take about 1-2 hours each.
 
 <!--
 #### 2.1.  

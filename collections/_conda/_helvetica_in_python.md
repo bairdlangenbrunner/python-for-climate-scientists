@@ -27,6 +27,10 @@ One thing that is still off here, however, is the -1 superscript on the units la
 
 ---
 
+for LINUX:
+~/.cache/matplotlib/fontList.json
+~/.config/matplotlib/matplotlibrc
+
 ### Other font options
 
 * [**Seaborn**][seaborn-website] comes with Arial installed by default.  If you don't really have a preference for which font you're using, but you just *really don't like DejaVu Sans* (understandable!).  (Note if you're using LINUX, you may have still have to install it yourself; see [here][font-seaborn-stackoverflow].)
