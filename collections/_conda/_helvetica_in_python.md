@@ -3,27 +3,121 @@ title: Helvetica in Python
 order: 2
 ---
 
-> *Disclaimer: The info below has worked for me, but Python seems to be quite finicky with fonts.  I pulled information from [Olga Botvinnik's blog entry on the subject][olga-blog-entry], which is worth reading in its entirety, and I've also found a [group lab website][chang-lab-helvetica] that has done similar things.  The steps below are a bit more simplified.*
+> *Disclaimer: The info below has worked for me, but Python seems to be quite finicky with fonts.  I pulled information from [Olga Botvinnik's blog entry on the subject][olga-blog-entry], which is worth reading in its entirety, and I've also found a [group lab website][chang-lab-helvetica] that has done similar things.  The steps below are a bit more simplified, thanks to those who have already reported on this.*
 
-I don't have a lot of complaints about Matplotlib, but something that has always irked me is the default font.  It's currently DejaVu Sans; here it is, in all its squat glory:
+I don't have a lot of complaints about Matplotlib, but something that has always irked me is the default font.  It's currently DejaVu Sans; here it is, with the code to reproduce it, in all its squat glory:
+
+```python
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+
+xvals = np.linspace(-5,5,1000)
+yvals = np.cos(xvals)
+```
+
+```python
+fontsize = 24
+
+fig, ax = plt.subplots()
+fig.set_size_inches(4.5,3.75)
+
+ax.plot(xvals,yvals,c='0.1',lw=2,label=r'$\phi(t)$')
+
+ax.tick_params(labelsize=fontsize)
+ax.set_xlim(-np.pi, np.pi)
+ax.set_title('title', fontsize=fontsize)
+ax.set_xlabel(r'$\alpha \beta \gamma$ units$^{\,-1}$', fontsize=fontsize)
+ax.set_ylabel('y label', fontsize=fontsize)
+ax.legend(fontsize=fontsize, loc=0, facecolor='None')
+
+fig.tight_layout()
+```
 
 <div style="width:60%">![](/figures/fonts/dejavu_sans_example.png)</div>
 
-I know this is a small fish to fry, but I'm not a fan of this font--especially the numbers on the axes (and the -1 subscript).  They're just... annoyingly wide!
+<br>
+
+I know this is a small fish to fry, but I'm not a fan of this font--especially the numbers on the axes (and the -1 subscript).  They're just... distractingly wide. >_<
+
+Note you can add Latex-style formatting in Matplotlib by using two dollar signs with a prefix "r" around the string's quotatio marks:```r'$\alpha$'```.  In Jupyter Notebook, you can usually drop the "r" and just use ```$\alpha$```.
 
 ---
 
-Here's what it looks like with Helvetica:
+Here's what it looks like with Helvetica (after making adjustments to the default, which you can read about below):
 
-<div style="width:60%">![](/Users/baird/Dropbox/_github_repos_personal/python-for-climate-scientists/figures/fonts/helvetica_example.png)</div>
+```python
+fontsize = 24
 
-Check out those thinner letters!  Notice those sexier numbers.  I'm into it.
+fig, ax = plt.subplots()
+fig.set_size_inches(4.5,3.75)
 
-One thing that is still off here, however, is the -1 superscript on the units label.
+ax.plot(xvals,yvals,c='0.1',lw=2,label='$\phi(t)$')
+
+ax.tick_params(labelsize=fontsize)
+ax.set_xlim(-np.pi, np.pi)
+ax.set_title('title', fontsize=fontsize)
+ax.set_xlabel(r'$\alpha \beta \gamma$ units$^{\,-1}$', fontsize=fontsize)
+ax.set_ylabel('y label', fontsize=fontsize)
+ax.legend(fontsize=fontsize, loc=0, facecolor='None')
+
+fig.tight_layout()
+```
+
+<div style="width:60%">![](/figures/fonts/helvetica_example.png)</div>
+
+<br>
+Check out that dreamy text!  Woof.
+
+One thing that is **still** off, however, is the font of the the -1 superscript on the units label.  And if you compare the two figures closely, you'll also notice the Greek letters on the x-axis label haven't changed (but... they *should*, right?  Helvetica and DejaVu Sans should have different math-styled fonts.)
+
+The final solution comes from telling the "rcParams" (run command parameters) to use the regular font (now Helvetica) as the formatting for math.
+
+```python
+plt.rcParams.update({'mathtext.default': 'regular'})
+
+fontsize = 24
+
+fig, ax = plt.subplots()
+fig.set_size_inches(4.5,3.75)
+
+ax.plot(xvals,yvals,c='0.1',lw=2,label='$\phi(t)$')
+
+ax.tick_params(labelsize=fontsize)
+ax.set_xlim(-np.pi, np.pi)
+ax.set_title('title', fontsize=fontsize)
+ax.set_xlabel(r'$\alpha \beta \gamma$ units$^{\,-1}$', fontsize=fontsize)
+ax.set_ylabel('y label', fontsize=fontsize)
+ax.legend(fontsize=fontsize, loc=0, facecolor='None')
+
+fig.tight_layout()
+```
+
+<br>
 
 <div style="width:60%">![](/figures/fonts/helvetica_example_fixed_mathtext.png)</div>
 
-, and every time I install Matplotlib anew on a machine, I make sure I get Helvetica working properly and by default with it.  It's a fairly simple process, originally described in [Olga Botvinnik back in 2012][olga-blog-entry], and I always refer back to it when I need to.
+<br>
+
+Ok, we're in business.
+
+---
+
+### Setting this up on your machine
+
+Every time I install Matplotlib anew on a machine, I make sure I get Helvetica working properly and by default with it.  It's a fairly straightforward process, but you have to be patient.  I always refer back to this [blog entry][olga-blog-entry].
+
+#### 1. Obtain Helvetica in ```.ttf``` format.
+The blog linked above gives instructions to do this on a Mac (by converting the ```.dfont``` files already available into ```.ttf```).  I keep them [here][helvetica-ttf-location] for quicker personal access, though.  You should have about 6 files (that cover all the weights/styles).
+
+#### 2. Place those ```.ttf``` files wherever Matplotlib keeps its fonts.
+If you have Anaconda/Miniconda, it will be somewhere like this:
+
+```
+~/miniconda3/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf
+```
+
+You can search for this location by typing 
 
 ---
 
@@ -45,4 +139,4 @@ for LINUX:
 
 [font-seaborn-stackoverflow]: https://stackoverflow.com/questions/20753782/default-fonts-in-seaborn-statistical-data-visualization-in-ipython
 
-[dejavu-sans-example]:
+[helvetica-ttf-location]: https://github.com/bairdlangenbrunner/bairdlangenbrunner.github.io/tree/master/helvetica_ttf_files

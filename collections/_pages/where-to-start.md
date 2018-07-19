@@ -111,9 +111,10 @@ I recommend skimming the [Jupyter Notebook documentation][jupyter-notebook-doc] 
 
 Check out my approach on [setting up NCO, CDO, and NCL][conda-environments-page] using conda alone.
 
+<!--
 ### 6.  A handful of students and postdocs are actively managing a [tutorial series for Python](https://github.com/raspstephan/ESS-Python-Tutorial).  Download the repository and work your way through the lessons; they're designed to take about 1-2 hours each.
 
-<!--
+
 #### 2.1.  
 
 The first thing to do is open up a terminal shell (Terminal on Mac, or my preference:  iTerm2), type ```python```, and hit enter.  If your Anaconda installation was successful, it will show something like this:

@@ -52,9 +52,11 @@ And from here, you can install the package you want within it.  For NCO, that wi
 conda install -c conda-forge nco
 ```
 
-Note the ```-c``` in ```-c conda-forge``` means "channel."  What this does is tells conda to look in the "conda-forge" channel (which hosts a broader range of user-created packages and beta versions of official Python packages).  To see what channels were used to install your conda packages, type ```conda list```.  This conveniently lists the packages installed in the current environment, their version and build information, and the channel used to install them.  For packages with nothing under the "Channel" column, they were installed using the defaults channel.  For NCO and other fairly specific software packages, conda will typically need the conda-forge channel.
+Note the ```-c``` in ```-c conda-forge``` means "channel."  What this does is tells conda to look in the "conda-forge" channel (which hosts a broader range of user-created packages and unofficial versions of packages within the defaults channel).
 
-This is an example for the ```ncl_stable``` environment.  These are all the packages that conda installed to get NCO on my computer.  (Imagine having to keep all of these, and even more, working compatibly!  This is the true utility of a conda environment.)
+To see which channels were used to install your conda packages, type ```conda list```.  This conveniently lists the packages installed in the current environment, their version and build information, and the channel used to install them.  For packages with nothing under the "Channel" column, they were installed using the defaults channel.  For NCO and other fairly specific software packages, conda will typically need the conda-forge channel.
+
+This is an example for the ```ncl_stable``` environment.  These are all the packages that conda installed to get NCO on my computer.  (Imagine having to keep all of these updated and working compatibly with one another on your computer!  This is the true utility of a conda environment; it takes care of this for you.)
 
 ```
 baird$ conda list

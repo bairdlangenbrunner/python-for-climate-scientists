@@ -147,16 +147,12 @@ BAIRD NOTE:  this is the navigation bar
 
 <p>I recommend using either <strong><a href="https://conda.io/docs/user-guide/install/download.html">Anaconda or Miniconda</a></strong> to install and maintain Python on your machine(s).</p>
 
-<blockquote>
-  <ul>
-    <li>
-      <p><code class="highlighter-rouge">Anaconda</code> and <code class="highlighter-rouge">Miniconda</code> are software packages that install the Python language, some other useful packages, and most importantly, <code class="highlighter-rouge">conda</code>.</p>
-    </li>
-    <li>
-      <p><code class="highlighter-rouge">conda</code> itself is an open source package manager that was built in Python and helps keep all of its libraries compatible.  (Well, it was originally built for Python, but it’s technically language-agnostic. So if you find yourself using other open-source languages like R or Julia often, conda is a great way to maintain them.)</p>
-    </li>
-  </ul>
-</blockquote>
+<ul>
+  <li>
+<code class="highlighter-rouge">Anaconda</code> and <code class="highlighter-rouge">Miniconda</code> are software packages that install the Python language, some other useful packages, and most importantly, <code class="highlighter-rouge">conda</code>.</li>
+  <li>
+<code class="highlighter-rouge">conda</code> itself is an open source package manager that was built in Python and helps keep all of its libraries compatible.  (Well, it was originally built for Python, but it’s technically language-agnostic. So if you find yourself using other open-source languages like R or Julia often, conda is a great way to maintain them.)</li>
+</ul>
 
 <h4 id="should-i-download-anaconda-or-miniconda">Should I download Anaconda or Miniconda?</h4>
 <blockquote>
@@ -181,7 +177,7 @@ BAIRD NOTE:  this is the navigation bar
 <h4 id="alternatives-to-anacondaminiconda">Alternatives to Anaconda/Miniconda</h4>
 <blockquote>
   <p><strong>“So what about pip for installing Python?  I know someone who seems to prefer that.”</strong>
-Sure, pip is great!  But for what it’s worth, pip comes <em>with</em> Anaconda and Miniconda, so you may as well go with one of those instead.  They work fairly well together.</p>
+Sure, pip is great!  But for what it’s worth, pip comes <em>with</em> Anaconda and Miniconda, so you may as well go with one of those instead.  They work well together.</p>
 
   <p><strong>“Hmm… ok, and what about Canopy?  I think I met a ghost once who uses it!”</strong>
 Canopy seems like it could be great, but it’s not free to use the full distribution, and the Python community really seems to be gathering around conda these days.</p>
@@ -193,7 +189,7 @@ Canopy seems like it could be great, but it’s not free to use the full distrib
 
 <h3 id="3-install-the-libraries-youll-need-most">3. Install the libraries you’ll need most</h3>
 
-<p>If you have Anaconda, some of these will already be on your system.  If instead you went with Miniconda, you’ll likely need to grab a few extra things.  The most useful libraries for any Python installation are below.  I think of this table as the top four:</p>
+<p>If you have Anaconda, some of these will already be on your system.  If instead you went with Miniconda, you’ll likely need to grab a few extra things.  The most useful libraries for any Python installation are below:</p>
 
 <table>
   <thead>
@@ -218,7 +214,7 @@ Canopy seems like it could be great, but it’s not free to use the full distrib
   </tbody>
 </table>
 
-<p>My favorite libraries <strong>more specific to Earth science data analysis</strong> include:</p>
+<p>My favorites <strong>more specific to Earth science data analysis</strong> include:</p>
 
 <table>
   <thead>
@@ -259,7 +255,7 @@ Canopy seems like it could be great, but it’s not free to use the full distrib
     </tr>
     <tr>
       <td>cmocean</td>
-      <td>really great colorblind-friendly colormaps</td>
+      <td>really great color blind-friendly colormaps</td>
     </tr>
   </tbody>
 </table>
@@ -283,7 +279,7 @@ Canopy seems like it could be great, but it’s not free to use the full distrib
 
 <p>Make sure you install the four packages in the first table above (<code class="highlighter-rouge">numpy</code>, <code class="highlighter-rouge">scipy</code>, <code class="highlighter-rouge">matplotlib</code>, and <code class="highlighter-rouge">jupyter</code>).  This will get you the main ingredients you need to get familiar with Python.</p>
 
-<p>Probably the easiest way to learn the language is using Jupyter Notebook, which takes Python and puts it into a browser window and lets you add notes, images, and even Latex to document your workflow.</p>
+<p>Probably the easiest way to learn the language is using Jupyter Notebook, which takes Python and ports it through a browser window, providing a great interface where you can add notes, images, and even Latex to document your workflow.</p>
 
 <p>To start up a notebook, you want to navigate to a directory where you’d like to save it on your computer, then type:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter notebook
@@ -303,6 +299,8 @@ Canopy seems like it could be great, but it’s not free to use the full distrib
 <h3 id="5--optional-read-about-how-to-set-up-some-useful-conda-environments">5.  Optional: Read about how to set up some useful conda environments</h3>
 
 <p>Check out my approach on <a href="https://bairdlangenbrunner.github.io/python-for-climate-scientists/conda/setting-up-conda-environments.html">setting up NCO, CDO, and NCL</a> using conda alone.</p>
+
+<h3 id="6--a-handful-of-students-and-postdocs-are-actively-managing-a-tutorial-series-for-python--download-the-repository-and-work-your-way-through-the-lessons-theyre-designed-to-take-about-1-2-hours-each">6.  A handful of students and postdocs are actively managing a <a href="https://github.com/raspstephan/ESS-Python-Tutorial">tutorial series for Python</a>.  Download the repository and work your way through the lessons; they’re designed to take about 1-2 hours each.</h3>
 
 <!--
 #### 2.1.  
