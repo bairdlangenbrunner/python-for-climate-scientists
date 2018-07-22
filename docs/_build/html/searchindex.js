@@ -1,0 +1,1 @@
+Search.setIndex({docnames:["index"],envversion:53,filenames:["index.rst"],objects:{},objnames:{},objtypes:{},terms:{index:0,modul:0,page:0,search:0},titles:["Welcome to Python for climate scientists\u2019s documentation!"],titleterms:{climat:0,document:0,indic:0,python:0,scientist:0,tabl:0,welcom:0}})
