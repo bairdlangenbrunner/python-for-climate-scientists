@@ -256,7 +256,7 @@ BAIRD NOTE:  this is the navigation bar
 <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s">'elevation (m)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/contourf_topo.png)</div>
+<p><img src="https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/contourf_topo.png" alt="" /></p>
 
 <p>Notice the edges are a little rough looking, since <code class="highlighter-rouge">contourf</code> is interpolating up against NaN values that we placed into the data array where there was less than 10% land.</p>
 
@@ -289,11 +289,11 @@ BAIRD NOTE:  this is the navigation bar
 <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s">'elevation (m)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong.png)</div>
+<p><img src="https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong.png" alt="" /></p>
 
 <p>I realize that this kind of thing isn’t <em>that</em> bad, especially if you’re looking at global plots where coastline details matter less.  But I avoided <code class="highlighter-rouge">pcolormesh</code> for a long time because of this effect.  When you zoom in, it looks even worse:</p>
 
-<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong_zoom.png)</div>
+<p><img src="https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong_zoom.png" alt="" /></p>
 
 <p>What’s going on can be found in the <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolor.html"><code class="highlighter-rouge">pcolor</code> documentation</a>:  There’s actually an <em>interpolation</em> happening, where the function interpolates the original grid to its <strong>vertices</strong> and thereby shortens the latitude and longitude data by a row and column each.  So the elevation values plotted above are correct; there’s no interpolation happening there (to my knowledge).  It’s just that the latitude and longitude grids have been interpolated internally.  This leads to the offset seen above.</p>
 
@@ -359,17 +359,17 @@ BAIRD NOTE:  this is the navigation bar
 
 <p>Now it’s looking good…</p>
 
-<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct.png)</div>
+<p><img src="https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct.png" alt="" /></p>
 
 <p>…even when we zoom in:</p>
 
-<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_zoom.png)</div>
+<p><img src="https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_zoom.png" alt="" /></p>
 
 <p>The coarseness of the model grid is still going to look a <em>little</em> funny against coastlines, but that’s about as good as we can get at this resolution.</p>
 
 <p>Even on a global grid that requires reprojection, we can be rest assured that the coastlines are lining up as well as they can:</p>
 
-<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_homolosine.png)</div>
+<p><img src="https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_homolosine.png" alt="" /></p>
 
 
   </div>
