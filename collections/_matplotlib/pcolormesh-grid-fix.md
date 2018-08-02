@@ -126,7 +126,7 @@ cbar.ax.tick_params(labelsize=12)
 cbar.set_label('elevation (m)', fontsize=12)
 ```
 
-<div style="width:100%">![]({{site.url}}/python-for-climate-scientists/figures/pcolormesh/contourf_topo.png)</div>
+<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/contourf_topo.png)</div>
 
 
 Notice the edges are a little rough looking, since ```contourf``` is interpolating up against NaN values that we placed into the data array where there was less than 10% land.
@@ -161,11 +161,11 @@ cbar.ax.tick_params(labelsize=12)
 cbar.set_label('elevation (m)', fontsize=12)
 ```
 
-<div style="width:100%">![]({{site.url}}/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong.png)</div>
+<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong.png)</div>
 
 I realize that this kind of thing isn't *that* bad, especially if you're looking at global plots where coastline details matter less.  But I avoided ```pcolormesh``` for a long time because of this effect.  When you zoom in, it looks even worse:
 
-<div style="width:100%">![]({{site.url}}/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong_zoom.png)</div>
+<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong_zoom.png)</div>
 
 What's going on can be found in the [```pcolor``` documentation][pcolor-site]:  There's actually an *interpolation* happening, where the function interpolates the original grid to its **vertices** and thereby shortens the latitude and longitude data by a row and column each.  So the elevation values plotted above are correct; there's no interpolation happening there (to my knowledge).  It's just that the latitude and longitude grids have been interpolated internally.  This leads to the offset seen above.
 
@@ -231,17 +231,17 @@ cbar.set_label('elevation (m)', fontsize=12)
 
 Now it's looking good...
 
-<div style="width:100%">![]({{site.url}}/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct.png)</div>
+<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct.png)</div>
 
 ...even when we zoom in:
 
-<div style="width:100%">![]({{site.url}}/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_zoom.png)</div>
+<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_zoom.png)</div>
 
 The coarseness of the model grid is still going to look a *little* funny against coastlines, but that's about as good as we can get at this resolution.
 
 Even on a global grid that requires reprojection, we can be rest assured that the coastlines are lining up as well as they can:
 
-<div style="width:100%">![](../../figures/pcolormesh/pcolormesh_correct_homolosine.png)</div>
+<div style="width:100%">![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_homolosine.png)</div>
 
 [pcolor-site]: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolor.html
 [pcolormesh-site]: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolormesh.html
