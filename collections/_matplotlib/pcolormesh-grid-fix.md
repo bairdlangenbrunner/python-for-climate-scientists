@@ -241,7 +241,7 @@ The coarseness of the model grid is still going to look a *little* funny against
 
 Even on a global grid that requires reprojection, we can be rest assured that the coastlines are lining up as well as they can:
 
-<div style="width:100%">![]({{site.url}}/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_homolosine.png)</div>
+<div style="width:100%">![](../../figures/pcolormesh/pcolormesh_correct_homolosine.png)</div>
 
 [pcolor-site]: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolor.html
 [pcolormesh-site]: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolormesh.html
