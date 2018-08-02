@@ -60,6 +60,14 @@ BAIRD NOTE:  this is the navigation bar
         </li>
         
       
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/matplotlib/index.html">
+            matplotlib
+          </a>
+        </li>
+        
+      
     </ul>
   </div>
 
@@ -106,6 +114,16 @@ BAIRD NOTE:  this is the navigation bar
         <li class="inline-block">
           <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/conda/index.html">
             conda
+          </a>
+        </li>
+        
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/matplotlib/index.html">
+            matplotlib
           </a>
         </li>
         
@@ -200,9 +218,11 @@ vcv076219:python-for-climate-scientists baird$
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -c conda-forge nco
 </code></pre></div></div>
 
-<p>Note the <code class="highlighter-rouge">-c</code> in <code class="highlighter-rouge">-c conda-forge</code> means “channel.”  What this does is tells conda to look in the “conda-forge” channel (which hosts a broader range of user-created packages and beta versions of official Python packages).  To see what channels were used to install your conda packages, type <code class="highlighter-rouge">conda list</code>.  This conveniently lists the packages installed in the current environment, their version and build information, and the channel used to install them.  For packages with nothing under the “Channel” column, they were installed using the defaults channel.  For NCO and other fairly specific software packages, conda will typically need the conda-forge channel.</p>
+<p>Note the <code class="highlighter-rouge">-c</code> in <code class="highlighter-rouge">-c conda-forge</code> means “channel.”  What this does is tells conda to look in the “conda-forge” channel (which hosts a broader range of user-created packages and unofficial versions of packages within the defaults channel).</p>
 
-<p>This is an example for the <code class="highlighter-rouge">ncl_stable</code> environment.  These are all the packages that conda installed to get NCO on my computer.  (Imagine having to keep all of these, and even more, working compatibly!  This is the true utility of a conda environment.)</p>
+<p>To see which channels were used to install your conda packages, type <code class="highlighter-rouge">conda list</code>.  This conveniently lists the packages installed in the current environment, their version and build information, and the channel used to install them.  For packages with nothing under the “Channel” column, they were installed using the defaults channel.  For NCO and other fairly specific software packages, conda will typically need the conda-forge channel.</p>
+
+<p>This is an example for the <code class="highlighter-rouge">ncl_stable</code> environment.  These are all the packages that conda installed to get NCO on my computer.  (Imagine having to keep all of these updated and working compatibly with one another on your computer!  This is the true utility of a conda environment; it takes care of this for you.)</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>baird$ conda list
 # packages in environment at /Users/baird/miniconda3/envs/nco_stable:

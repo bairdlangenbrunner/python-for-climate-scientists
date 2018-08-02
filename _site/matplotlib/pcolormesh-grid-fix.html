@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Fixing pcolormesh offsets in cartopy</title>
+  <meta name="description" content="One of the most frequently recurring frustrations with Matplotlib is how the pcolor and pcolormesh functions work.  I tend to use pcolormesh more, since the ...">
+
+  
+  
+  <link rel="stylesheet" href="http://localhost:4000/assets/style.css">
+
+  <link rel="canonical" href="http://localhost:4000/matplotlib/pcolormesh-grid-fix.html">
+  <link rel="alternate" type="application/rss+xml" title="Python for climate scientists" href="http://localhost:4000/feed.xml">
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+
+  <body>
+
+    <!--
+<header class="border-bottom-thick px-2 clearfix">
+
+BAIRD NOTE:  this is the navigation bar
+
+  <div class="left sm-width-full py-1 mt-1 mt-lg-0">
+    <a class="align-middle link-primary text-accent" href="/">
+      Python for climate scientists
+    </a>
+  </div>
+  <div class="right sm-width-full">
+    <ul class="list-reset mt-lg-1 mb-2 mb-lg-1">
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/about/">
+            about
+          </a>
+        </li>
+        
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/where-to-start/">
+            where to start
+          </a>
+        </li>
+        
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/conda/index.html">
+            conda
+          </a>
+        </li>
+        
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/matplotlib/index.html">
+            matplotlib
+          </a>
+        </li>
+        
+      
+    </ul>
+  </div>
+
+</header>
+
+-->
+
+
+<header class="border-bottom-thick px-2 clearfix">
+
+<!-- BAIRD NOTE:  this is the navigation bar -->
+
+  <div class="left sm-width-full py-1">
+    <a class="align-middle link-primary text-accent" href="/">
+      Python for climate scientists
+    </a>
+  </div>
+  <div class="right sm-width-full py-1">
+    <ul class="list-reset">
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/about/">
+            about
+          </a>
+        </li>
+        
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/where-to-start/">
+            where to start
+          </a>
+        </li>
+        
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/conda/index.html">
+            conda
+          </a>
+        </li>
+        
+      
+      
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary ml-2 align-left-and-pad-when-small" href="/matplotlib/index.html">
+            matplotlib
+          </a>
+        </li>
+        
+      
+      
+    </ul>
+  </div>
+
+</header>
+
+
+    <div>
+      <article class="container px-2 mx-auto mb" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <h1 class="h1 col-9 sm-width-full inline-block always-full-width-of-container" itemprop="name headline">Fixing pcolormesh offsets in cartopy</h1>
+  <div class="col-4 sm-width-full mt-1 mb-3 border-top-thin "></div>
+
+  <div class="prose" itemprop="articleBody">
+      <p>One of the most frequently recurring frustrations with Matplotlib is how the <code class="highlighter-rouge">pcolor</code> and <code class="highlighter-rouge">pcolormesh</code> functions work.  I tend to use <code class="highlighter-rouge">pcolormesh</code> more, since the two functions are practically the same but the latter much faster.</p>
+
+<p>You may be familiar with how they work:  give a set of <code class="highlighter-rouge">x</code>,<code class="highlighter-rouge">y</code>, and <code class="highlighter-rouge">z</code> values, and it plots individual data as filled pixels corresponding to a color map range you specify.  Here’s an example using the <a href="https://www.cesm.ucar.edu/projects/community-projects/LENS/">NCAR Large Ensemble</a>’s topography file (download it <a href="https://">here</a>).</p>
+
+<p>First import the necessary packages:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">xarray</span>
+<span class="kn">import</span> <span class="nn">cartopy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</code></pre></div></div>
+
+<p>Then open up the topography file:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">topo_file</span> <span class="o">=</span> <span class="n">xarray</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s">'USGS-gtopo30_0.9x1.25_remap_c051027.nc'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Printing <code class="highlighter-rouge">topo_file</code> to screen gives this:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">topo_file</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">Dataset</span><span class="o">&gt;</span>
+<span class="n">Dimensions</span><span class="p">:</span>       <span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="mi">192</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="mi">288</span><span class="p">)</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">lat</span>           <span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="n">float64</span> <span class="o">-</span><span class="mf">90.0</span> <span class="o">-</span><span class="mf">89.06</span> <span class="o">-</span><span class="mf">88.12</span> <span class="o">-</span><span class="mf">87.17</span> <span class="o">-</span><span class="mf">86.23</span> <span class="o">-</span><span class="mf">85.29</span> <span class="o">...</span>
+  <span class="o">*</span> <span class="n">lon</span>           <span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="n">float64</span> <span class="mf">0.0</span> <span class="mf">1.25</span> <span class="mf">2.5</span> <span class="mf">3.75</span> <span class="mf">5.0</span> <span class="mf">6.25</span> <span class="mf">7.5</span> <span class="mf">8.75</span> <span class="mf">10.0</span> <span class="o">...</span>
+<span class="n">Data</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">PHIS</span>          <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">float64</span> <span class="mf">2.77e+04</span> <span class="mf">2.77e+04</span> <span class="mf">2.77e+04</span> <span class="mf">2.77e+04</span> <span class="o">...</span>
+    <span class="n">SGH</span>           <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">float64</span> <span class="o">...</span>
+    <span class="n">SGH30</span>         <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">float64</span> <span class="o">...</span>
+    <span class="n">LANDFRAC</span>      <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">float64</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="o">...</span>
+    <span class="n">LANDM_COSLAT</span>  <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="n">float64</span> <span class="o">...</span>
+<span class="n">Attributes</span><span class="p">:</span>
+    <span class="n">history</span><span class="p">:</span>    <span class="n">Written</span> <span class="n">on</span> <span class="n">date</span><span class="p">:</span> <span class="mi">20051027</span>\<span class="n">ndefinesurf</span> <span class="o">-</span><span class="n">remap</span> <span class="o">-</span><span class="n">t</span> <span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">cgd</span><span class="o">/</span><span class="n">csm</span><span class="o">/</span><span class="n">i</span><span class="o">...</span>
+    <span class="n">make_ross</span><span class="p">:</span>  <span class="n">true</span>
+    <span class="n">topofile</span><span class="p">:</span>   <span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">cgd</span><span class="o">/</span><span class="n">csm</span><span class="o">/</span><span class="n">inputdata</span><span class="o">/</span><span class="n">atm</span><span class="o">/</span><span class="n">cam</span><span class="o">/</span><span class="n">topo</span><span class="o">/</span><span class="n">USGS</span><span class="o">-</span><span class="n">gtopo30_10min_c050419</span><span class="o">.</span><span class="n">nc</span>
+    <span class="n">gridfile</span><span class="p">:</span>   <span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">cgd</span><span class="o">/</span><span class="n">csm</span><span class="o">/</span><span class="n">inputdata</span><span class="o">/</span><span class="n">atm</span><span class="o">/</span><span class="n">cam</span><span class="o">/</span><span class="n">coords</span><span class="o">/</span><span class="n">fv_0</span><span class="o">.</span><span class="mi">9</span><span class="n">x1</span><span class="o">.</span><span class="mf">25.</span><span class="n">nc</span>
+    <span class="n">landmask</span><span class="p">:</span>   <span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">cgd</span><span class="o">/</span><span class="n">csm</span><span class="o">/</span><span class="n">inputdata</span><span class="o">/</span><span class="n">atm</span><span class="o">/</span><span class="n">cam2</span><span class="o">/</span><span class="n">hrtopo</span><span class="o">/</span><span class="n">landm_coslat</span><span class="o">.</span><span class="n">nc</span>
+</code></pre></div></div>
+
+<p>Note the field we want is <code class="highlighter-rouge">PHIS</code>, which is the surface geopotential.  If the NetCDF file has metadata with it, you can interrogate the units by printing the specific variable:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">topo_file</span><span class="p">[</span><span class="s">'PHIS'</span><span class="p">])</span>
+
+<span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">DataArray</span> <span class="s">'PHIS'</span> <span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="mi">192</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="mi">288</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="n">array</span><span class="p">([[</span><span class="mf">27701.627574</span><span class="p">,</span> <span class="mf">27701.627574</span><span class="p">,</span> <span class="mf">27701.627574</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">27701.627574</span><span class="p">,</span>
+        <span class="mf">27701.627574</span><span class="p">,</span> <span class="mf">27701.627574</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">26781.993496</span><span class="p">,</span> <span class="mf">26801.877955</span><span class="p">,</span> <span class="mf">26823.24702</span> <span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">26731.480458</span><span class="p">,</span>
+        <span class="mf">26746.794726</span><span class="p">,</span> <span class="mf">26763.628318</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">25888.717611</span><span class="p">,</span> <span class="mf">25951.505898</span><span class="p">,</span> <span class="mf">26014.836766</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">25705.620241</span><span class="p">,</span>
+        <span class="mf">25765.581423</span><span class="p">,</span> <span class="mf">25826.676211</span><span class="p">],</span>
+       <span class="o">...</span><span class="p">,</span>
+       <span class="p">[</span>    <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span> <span class="o">...</span><span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span>
+            <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">],</span>
+       <span class="p">[</span>    <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span> <span class="o">...</span><span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span>
+            <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">],</span>
+       <span class="p">[</span>    <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span> <span class="o">...</span><span class="p">,</span>     <span class="mf">0.</span>      <span class="p">,</span>
+            <span class="mf">0.</span>      <span class="p">,</span>     <span class="mf">0.</span>      <span class="p">]])</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">lat</span>      <span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="n">float64</span> <span class="o">-</span><span class="mf">90.0</span> <span class="o">-</span><span class="mf">89.06</span> <span class="o">-</span><span class="mf">88.12</span> <span class="o">-</span><span class="mf">87.17</span> <span class="o">-</span><span class="mf">86.23</span> <span class="o">-</span><span class="mf">85.29</span> <span class="o">-</span><span class="mf">84.35</span> <span class="o">...</span>
+  <span class="o">*</span> <span class="n">lon</span>      <span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="n">float64</span> <span class="mf">0.0</span> <span class="mf">1.25</span> <span class="mf">2.5</span> <span class="mf">3.75</span> <span class="mf">5.0</span> <span class="mf">6.25</span> <span class="mf">7.5</span> <span class="mf">8.75</span> <span class="mf">10.0</span> <span class="mf">11.25</span> <span class="o">...</span>
+<span class="n">Attributes</span><span class="p">:</span>
+    <span class="n">long_name</span><span class="p">:</span>   <span class="n">surface</span> <span class="n">geopotential</span>
+    <span class="n">units</span><span class="p">:</span>       <span class="n">m2</span><span class="o">/</span><span class="n">s2</span>
+    <span class="n">from_hires</span><span class="p">:</span>  <span class="n">true</span>
+    <span class="nb">filter</span><span class="p">:</span>      <span class="n">remap</span>
+</code></pre></div></div>
+
+<p>Looks like the <code class="highlighter-rouge">units</code> attribute tells us this field is m<sup>2</sup>s<sup>-2</sup>.  Divide by gravitational acceleration (<code class="highlighter-rouge">9.81</code>) to get back meters.  This will be our <code class="highlighter-rouge">z</code> value in <code class="highlighter-rouge">pcolormesh</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">topo_data</span> <span class="o">=</span> <span class="n">topo_file</span><span class="p">[</span><span class="s">'PHIS'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">/</span><span class="mf">9.81</span> <span class="c"># surf geopot. divided by gravity</span>
+</code></pre></div></div>
+
+<p>Also pull out the land fraction values and set everything <code class="highlighter-rouge">&lt;0.1</code> (i.e., less than 10% land) to a <code class="highlighter-rouge">np.nan</code> (NaN value in Numpy):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">landfrac_data</span> <span class="o">=</span> <span class="n">topo_file</span><span class="p">[</span><span class="s">'LANDFRAC'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">topo_data</span><span class="p">[</span><span class="n">landfrac_data</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</code></pre></div></div>
+
+<p>Finally, grab the longitude and latitude arrays, which will serve as our <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code> values:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lon</span> <span class="o">=</span> <span class="n">topo_file</span><span class="p">[</span><span class="s">'lon'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">topo_file</span><span class="p">[</span><span class="s">'lat'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="contourf-looks-fine">contourf looks fine…</h2>
+
+<p>Now let’s plot topography for a given region—I’ve chosen Indonesia here, because it illustrates the problem well.  Using <code class="highlighter-rouge">contourf</code>, you can code up something like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">data_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">geodetic_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mf">3.25</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">map_proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+
+<span class="n">topo_plot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span>\
+                        <span class="n">lat</span><span class="p">,</span>\
+                        <span class="n">topo_data</span><span class="p">,</span>\
+                        <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span>\
+                        <span class="n">extend</span><span class="o">=</span><span class="s">'max'</span><span class="p">,</span>\
+                        <span class="n">transform</span><span class="o">=</span><span class="n">data_proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="mi">90</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+
+<span class="c"># add colorbar</span>
+<span class="n">axpos</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+<span class="n">cbar_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="n">axpos</span><span class="o">.</span><span class="n">x1</span><span class="o">+</span><span class="mi">0</span><span class="p">,</span><span class="n">axpos</span><span class="o">.</span><span class="n">y0</span><span class="p">,</span><span class="mf">0.03</span><span class="p">,</span><span class="n">axpos</span><span class="o">.</span><span class="n">height</span><span class="p">])</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">topo_plot</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cbar_ax</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s">'elevation (m)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div style="width:100%">![](/figures/pcolormesh/contourf_topo.png)</div>
+
+<p>Notice the edges are a little rough looking, since <code class="highlighter-rouge">contourf</code> is interpolating up against NaN values that we placed into the data array where there was less than 10% land.</p>
+
+<hr />
+
+<h2 id="but-pcolormesh-is-offset">…but pcolormesh is offset</h2>
+
+<p>If we plot the same thing in <code class="highlighter-rouge">pcolormesh</code>, the pixels represent the model resolution directly, which can be a nice bit of information to add to the figure.  But this is where it gets annoying:  the coastlines are offset from the grid.  It’s pretty obvious if we plot them in red; notice a southwestern offset:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">data_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">geodetic_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mf">3.25</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">map_proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>
+
+<span class="n">topo_plot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span>\
+                          <span class="n">lat</span><span class="p">,</span>\
+                          <span class="n">topo_data</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>\
+                          <span class="n">transform</span><span class="o">=</span><span class="n">data_proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="mi">90</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+
+<span class="c"># add colorbar</span>
+<span class="n">axpos</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+<span class="n">cbar_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="n">axpos</span><span class="o">.</span><span class="n">x1</span><span class="o">+</span><span class="mi">0</span><span class="p">,</span><span class="n">axpos</span><span class="o">.</span><span class="n">y0</span><span class="p">,</span><span class="mf">0.03</span><span class="p">,</span><span class="n">axpos</span><span class="o">.</span><span class="n">height</span><span class="p">])</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">topo_plot</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cbar_ax</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s">'elevation (m)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div style="width:100%">![](/figures/pcolormesh/pcolormesh_wrong.png)</div>
+
+<p>I realize that this kind of thing isn’t <em>that</em> bad, especially if you’re looking at global plots where coastline details matter less.  But I avoided <code class="highlighter-rouge">pcolormesh</code> for a long time because of this effect.  When you zoom in, it looks even worse:</p>
+
+<div style="width:100%">![](/figures/pcolormesh/pcolormesh_wrong_zoom.png)</div>
+
+<p>What’s going on can be found in the <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolor.html"><code class="highlighter-rouge">pcolor</code> documentation</a>:  There’s actually an <em>interpolation</em> happening, where the function interpolates the original grid to its <strong>vertices</strong> and thereby shortens the latitude and longitude data by a row and column each.  So the elevation values plotted above are correct; there’s no interpolation happening there (to my knowledge).  It’s just that the latitude and longitude grids have been interpolated internally.  This leads to the offset seen above.</p>
+
+<hr />
+
+<h2 id="fix-it-by-interpolating-latitude-and-longitude-arrays-to-midpoints">Fix it by interpolating latitude and longitude arrays to midpoints</h2>
+
+<p>As far as I know, there’s no keyword or True/False switch in <code class="highlighter-rouge">pcolormesh</code> to fix this.  Instead, you need to feed it a shifted grid that it will internally interpolate.  To do this, my approach is to:</p>
+<ol>
+  <li>Add two rows and columns to the latitude and longitude grids (one on each side)</li>
+  <li>Interpolate to the center of those values and feed them into <code class="highlighter-rouge">pcolormesh</code>, so that its own interpolation creates the original grid</li>
+</ol>
+
+<p>Here’s an example; <strong>note this works best on regular, equally-spaced grids (the kind that CMIP models typically use in standard output)</strong>, but if they’re irregular it will still probably be better than doing nothing…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># extend longitude by 2</span>
+<span class="n">lon_extend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">lon</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="c"># fill in internal values</span>
+<span class="n">lon_extend</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lon</span> <span class="c"># fill up with original values</span>
+<span class="c"># fill in extra endpoints</span>
+<span class="n">lon_extend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lon</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lon</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lon_extend</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lon</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lon</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="c"># calculate the midpoints</span>
+<span class="n">lon_pcolormesh_midpoints</span> <span class="o">=</span> <span class="n">lon_extend</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lon_extend</span><span class="p">))</span>
+
+<span class="c"># extend latitude by 2</span>
+<span class="n">lat_extend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">lat</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="c"># fill in internal values</span>
+<span class="n">lat_extend</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lat</span>
+<span class="c"># fill in extra endpoints</span>
+<span class="n">lat_extend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lat</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lat_extend</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lat</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="c"># calculate the midpoints</span>
+<span class="n">lat_pcolormesh_midpoints</span> <span class="o">=</span> <span class="n">lat_extend</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lat_extend</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Note I use <code class="highlighter-rouge">np.diff()</code> to calculate the spacing between latitude and longitude points.  If all of your values are equally spaced, you can just use the actual step value here.  To be safer, I use the <code class="highlighter-rouge">diff</code> function, which would work better for an irregular grid.</p>
+
+<p>Now plug in the <code class="highlighter-rouge">lon_pcolormesh_midpoints</code> and <code class="highlighter-rouge">lat_pcolormesh_midpoints</code> arrays as your new <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code> values.  The size of each is one longer than the dimensions of the original <code class="highlighter-rouge">topo_data</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">data_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">geodetic_proj</span> <span class="o">=</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mf">3.25</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">map_proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>
+
+<span class="n">topo_plot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">lon_pcolormesh_midpoints</span><span class="p">,</span>\
+                          <span class="n">lat_pcolormesh_midpoints</span><span class="p">,</span>\
+                          <span class="n">topo_data</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>\
+                          <span class="n">transform</span><span class="o">=</span><span class="n">data_proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="mi">90</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+
+<span class="c"># add colorbar</span>
+<span class="n">axpos</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+<span class="n">cbar_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="n">axpos</span><span class="o">.</span><span class="n">x1</span><span class="o">+</span><span class="mi">0</span><span class="p">,</span><span class="n">axpos</span><span class="o">.</span><span class="n">y0</span><span class="p">,</span><span class="mf">0.03</span><span class="p">,</span><span class="n">axpos</span><span class="o">.</span><span class="n">height</span><span class="p">])</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">topo_plot</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cbar_ax</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s">'elevation (m)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now it’s looking good…</p>
+
+<div style="width:100%">![](/figures/pcolormesh/pcolormesh_correct.png)</div>
+
+<p>…even when we zoom in:</p>
+
+<div style="width:100%">![](/figures/pcolormesh/pcolormesh_correct_zoom.png)</div>
+
+<p>The coarseness of the model grid is still going to look a <em>little</em> funny against coastlines, but that’s about as good as we can get at this resolution.</p>
+
+<p>Even on a global grid that requires reprojection, we can be rest assured that the coastlines are lining up as well as they can:</p>
+
+<div style="width:100%">![](/figures/pcolormesh/pcolormesh_correct_homolosine.png)</div>
+
+
+  </div>
+
+</article>
+
+    </div>
+
+    <div class="border-top-thin clearfix mt-2 mt-lg-4 ">
+  <div class="container mx-auto px-2">
+    <!--<p class="col-8 sm-width-full left py-2 mb-0">This project is maintained by <a class="text-accent" href="https://github.com/bairdlangenbrunner">bairdlangenbrunner</a></p>-->
+    <!--<p class="col-8 left always-full-width-of-container py-2 mb-0">This website is a modification of <a class="text-accent" href="https://github.com/broccolini/swiss">Jekyll Swiss</a> and is maintained by Baird.  Contact me <a class="text-accent" href="mailto:blangenb@uci.edu">here</a>.</p>-->
+    <p class="left always-full-width-of-container py-2 mb-0">This site's design was adapted from <a class="text-accent" href="https://github.com/broccolini/swiss">Jekyll Swiss</a> and is maintained on GitHub <a class="text-accent" href="https://github.com/bairdlangenbrunner/swiss-cheese">here</a>.</p>
+    <!--
+    <ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
+      <li class="inline-block mr-1">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Python for climate scientists">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </li>
+      <li class="inline-block">
+        <a class="github-button" href="https://github.com/bairdlangenbrunner/swiss-cheese" data-icon="octicon-star" data-count-href="bairdlangenbrunner//stargazers" data-count-api="/repos/bairdlangenbrunner/#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star bairdlangenbrunner/ on GitHub">Star</a>
+      </li>
+    -->
+    </ul>
+  </div>
+</div>
+
+
+  </body>
+
+</html>

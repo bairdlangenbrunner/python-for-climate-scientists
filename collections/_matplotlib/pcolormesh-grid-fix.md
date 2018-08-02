@@ -1,5 +1,6 @@
 ---
 title: Fixing pcolormesh offsets in cartopy
+date: 2018-08-02
 order: 1
 ---
 
@@ -95,7 +96,7 @@ lat = topo_file['lat'].values
 
 ---
 
-## ```contourf``` looks fine...
+## contourf looks fine...
 
 Now let's plot topography for a given region—I've chosen Indonesia here, because it illustrates the problem well.  Using ```contourf```, you can code up something like this:
 
@@ -132,7 +133,7 @@ Notice the edges are a little rough looking, since ```contourf``` is interpolati
 
 ---
 
-## ...but ```pcolormesh``` is offset
+## ...but pcolormesh is offset
 
 If we plot the same thing in ```pcolormesh```, the pixels represent the model resolution directly, which can be a nice bit of information to add to the figure.  But this is where it gets annoying:  the coastlines are offset from the grid.  It's pretty obvious if we plot them in red; notice a southwestern offset:
 

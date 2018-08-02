@@ -23,36 +23,34 @@ plugins:
 # they apparently count as posts?
 include:
 #  - _posts
-  - _coding
   - _conda
   - _pages
+  - _matplotlib
 
 collections:
-  - coding
+  - conda
+  - matplotlib
 #  - pages
 #  - posts
 
 collections:
-  coding:
-    output: true
   conda:
     output: true
-#    permalink: python-for-climate-scientists/:collection/:path
-  pages:
+  matplotlib:
     output: true
-#    permalink: /:name
+#    permalink: python-for-climate-scientists/:collection/:path
   pages:
     output: true
 
 defaults:
   - scope:
       path: ""
-      type: coding
+      type: conda
     values:
       layout: post-no-date
   - scope:
       path: ""
-      type: conda
+      type: matplotlib
     values:
       layout: post-no-date
   - scope:
