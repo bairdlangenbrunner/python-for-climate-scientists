@@ -4,11 +4,11 @@ date: 2018-08-02
 order: 1
 ---
 
-One of the most frequently recurring frustrations with Matplotlib is how the ```pcolor``` and ```pcolormesh``` functions work.  I tend to use ```pcolormesh``` more, since the two functions are practically the same but the latter much faster.
+One recurring frustration that I have with Matplotlib is how the ```pcolor``` and ```pcolormesh``` functions work.  (I tend to use ```pcolormesh``` more, since the two functions are practically the same but the latter much faster.)
 
-You may be familiar with how they work:  give a set of ```x```,```y```, and ```z``` values, and it plots individual data as filled pixels corresponding to a color map range you specify.  Here's an example using the [NCAR Large Ensemble][lens-link]'s topography file (download it [here][topo-file-link]).
+You may be familiar with them:  given a set of ```x```,```y```, and ```z``` values, ```pcolor``` and ```pcolormesh``` plot individual data as filled pixels corresponding to a color map range you specify.  Here's an example using the [NCAR Large Ensemble][lens-link]'s topography file (download it [here][topo-file-link]).
 
-First import the necessary packages:
+First, import necessary Python packages and open the topography file:
 
 ```python
 import xarray
@@ -16,8 +16,6 @@ import cartopy
 import numpy as np
 import matplotlib.pyplot as plt
 ```
-
-Then open up the topography file:
 
 ```python
 topo_file = xarray.open_dataset('USGS-gtopo30_0.9x1.25_remap_c051027.nc')
@@ -81,7 +79,7 @@ Looks like the ```units``` attribute tells us this field is m<sup>2</sup>s<sup>-
 topo_data = topo_file['PHIS'].values/9.81 # surf geopot. divided by gravity
 ```
 
-Also pull out the land fraction values and set everything ```<0.1``` (i.e., less than 10% land) to a ```np.nan``` (NaN value in Numpy):
+Also pull out the land fraction values and set everything ```<0.1``` (i.e., less than 10% land) to a ```np.nan``` (NaN value in Numpy).  I do this kind of thing when I want to apply an ocean mask, for example:
 
 ```python
 landfrac_data = topo_file['LANDFRAC'].values
@@ -167,7 +165,9 @@ I realize that this kind of thing isn't *that* bad, especially if you're looking
 
 ![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_wrong_zoom.png)
 
-What's going on can be found in the [```pcolor``` documentation][pcolor-site]:  There's actually an *interpolation* happening, where the function interpolates the original grid to its **vertices** and thereby shortens the latitude and longitude data by a row and column each.  So the elevation values plotted above are correct; there's no interpolation happening there (to my knowledge).  It's just that the latitude and longitude grids have been interpolated internally.  This leads to the offset seen above.
+Gross.
+
+So what's going on?  That can be found in the [```pcolor``` documentation][pcolor-site]:  There's actually an *interpolation* happening, where the function interpolates the original grid to its **vertices** and thereby shortens the latitude and longitude data by a row and column each.  So the elevation values plotted above are correct; there's no interpolation happening there (to my knowledge).  It's just that the latitude and longitude grids have been interpolated internally, leading to the offset seen relative to the map.
 
 ---
 
@@ -201,7 +201,7 @@ lat_extend[-1] = lat[-1]+np.diff(lat)[-1]
 lat_pcolormesh_midpoints = lat_extend[:-1]+0.5*(np.diff(lat_extend))
 ```
 
-Note I use ```np.diff()``` to calculate the spacing between latitude and longitude points.  If all of your values are equally spaced, you can just use the actual step value here.  To be safer, I use the ```diff``` function, which would work better for an irregular grid.
+The above code isn't very complicated, and I imagine it can be simplified a lot more.  For example, I use ```np.diff()``` to calculate the spacing between latitude and longitude points.  If all of your values are equally spaced, you can just use the actual step value here (e.g., for a 2.5x2.5º grid, use 2.5 as the spacing).  To be safer, though, I use the ```diff``` function, which I do in case the grid is not regularly spaced.
 
 Now plug in the ```lon_pcolormesh_midpoints``` and ```lat_pcolormesh_midpoints``` arrays as your new ```x``` and ```y``` values.  The size of each is one longer than the dimensions of the original ```topo_data```.
 
@@ -237,14 +237,44 @@ Now it's looking good...
 
 ![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_zoom.png)
 
-The coarseness of the model grid is still going to look a *little* funny against coastlines, but that's about as good as we can get at this resolution.
+The coarseness of the model grid is still going to look a *little* funny against coastlines, but that's about as good as we can get at this resolution (which is about 1x1º).
 
-Even on a global grid that requires reprojection, we can be rest assured that the coastlines are lining up as well as they can:
+Even on a global grid that requires reprojection, with this fix to ```pcolormesh```, we can be rest-assured that the coastlines are lining up as well as they can:
 
 ![](https://bairdlangenbrunner.github.io/python-for-climate-scientists/figures/pcolormesh/pcolormesh_correct_homolosine.png)
+
+---
+
+## What if latitude and longitude are two-dimensional arrays?
+
+This should be pretty easy—you'll just need to be a little fancier with the array subsetting when calculating the midpoints.
+
+Something like this should work (but I haven't tested it enough, so it's not once-size-fits-all):
+
+```python
+# extend longitude by 2
+lon_extend = np.zeros(lon.shape[0],lon.shape[1]+2)
+# fill in internal values
+lon_extend[:,1:-1] = lon # fill up with original values
+# fill in extra endpoints
+lon_extend[:,0] = lon[:,0]-np.diff(lon, axis=1)
+lon_extend[:,-1] = lon[:,-1]+np.diff(lon, axis=1)
+# calculate the midpoints
+lon_pcolormesh_midpoints = lon_extend[:,:-1]+0.5*(np.diff(lon_extend, axis=1))
+
+# extend latitude by 2
+lat_extend = np.zeros(lat.shape[0]+2,lat.shape[1])
+# fill in internal values
+lat_extend[1:-1,:] = lat
+# fill in extra endpoints
+lat_extend[0,:] = lat[0,:]-np.diff(lat, axis=0)
+lat_extend[-1,:] = lat[-1,:]+np.diff(lat, axis=0)
+# calculate the midpoints
+lat_pcolormesh_midpoints = lat_extend[:-1,:]+0.5*(np.diff(lat_extend, axis=0))
+```
 
 [pcolor-site]: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolor.html
 [pcolormesh-site]: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.pcolormesh.html
 [cartopy-site]: https://scitools.org.uk/cartopy/docs/latest/
 [lens-link]:  https://www.cesm.ucar.edu/projects/community-projects/LENS/
-[topo-file-link]: https://
+[topo-file-link]: https://bairdlangenbrunner.github.io/python-for-climate-scientists/nc-data/USGS-gtopo30_0.9x1.25_remap_c051027.nc
